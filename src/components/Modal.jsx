@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Modal = ({ isOpen, onClose, projectDetails }) => {
     const [visible, setVisible] = React.useState(false);
@@ -39,18 +40,18 @@ const Modal = ({ isOpen, onClose, projectDetails }) => {
                     className={`flex justify-center items-center w-full h-full`}
                 >
                     <div
-                        className={`bg-gray-400 w-[500px] rounded-lg p-6 relative ${isOpen ? 'modalContentOpen' : 'modalContentClose'}`}
+                        className={`bg-gray-200 bg-opacity-95 w-[500px] rounded-sm p-6 relative ${isOpen ? 'modalContentOpen' : 'modalContentClose'}`}
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
-                            className="absolute top-4 right-4 text-gray-700 font-bold hover:scale-125 duration-[500ms]"
+                            className="absolute top-4 right-4 text-black hover:text-gray-500 font-bold hover:scale-125 duration-[500ms]"
                             onClick={onClose}
                         >
-                            X
+                            <CloseIcon />
                         </button>
                         {projectDetails &&
                             <div>
-                                <h2 className="text-2xl font-semibold mb-4">{projectDetails.title}</h2>
+                                <h2 className="text-2xl font-light mb-4">{projectDetails.title}</h2>
                                 <img src={projectDetails.image} alt={projectDetails.title} className="w-full mb-4 rounded-lg" />
                                 <p>{projectDetails.description}</p>
                             </div>
