@@ -40,7 +40,7 @@ const Modal = ({ isOpen, onClose, projectDetails }) => {
                     className={`flex justify-center items-center w-full h-full`}
                 >
                     <div
-                        className={`bg-gray-200 bg-opacity-95 w-[500px] rounded-sm p-6 relative ${isOpen ? 'modalContentOpen' : 'modalContentClose'}`}
+                        className={`bg-gray-200 bg-opacity-95 w-[800px] rounded-sm p-6 relative ${isOpen ? 'modalContentOpen' : 'modalContentClose'}`}
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
@@ -53,7 +53,16 @@ const Modal = ({ isOpen, onClose, projectDetails }) => {
                             <div>
                                 <h2 className="text-2xl font-light mb-4">{projectDetails.title}</h2>
                                 <img src={projectDetails.image} alt={projectDetails.title} className="w-full mb-4 rounded-lg" />
-                                <p>{projectDetails.description}</p>
+                                {projectDetails.description && Array.isArray(projectDetails.description) ? (
+                                    <ul className="list-disc pl-5 mb-4">
+                                        {projectDetails.description.map((item, index) => (
+                                            <li className='py-2' key={index}>{item}</li>
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <p>{projectDetails.description}</p>
+                                )}
+
                             </div>
                         }
                     </div>

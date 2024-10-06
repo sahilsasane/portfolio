@@ -8,24 +8,24 @@ const Footer = () => {
 
     const projectDetails = [
         {
-            title: 'Project 1',
-            description: 'Description of Project 1',
-            image: '/project1.jpg'
+            title: 'Lung Disease Classification using GAN',
+            description: ['Designed an advanced GAN for lung disease classification with 5,000+ chest X-ray images.', 'Employed diverse GAN architectures like DCGAN, ACGAN and WGAN GP to improve binary imageclassification in medical datasets.', 'Applied a stacking classifier with GAN features, achieving 98.7% classification accuracy.'],
+            image: '/jpg'
         },
         {
-            title: 'Project 2',
-            description: 'Description of Project 2',
-            image: '/project2.jpg'
+            title: 'Recommendation System ',
+            description: 'Description',
+            image: '/jpg'
         },
         {
-            title: 'Project 3',
-            description: 'Description of Project 3',
-            image: '/project3.jpg'
+            title: 'VyavaSahayak',
+            description: 'Description',
+            image: '/jpg'
         },
         {
-            title: 'Project 4',
-            description: 'Description of Project 4',
-            image: '/project4.jpg'
+            title: 'Chat Application',
+            description: 'Description',
+            image: '/.jpg'
         }
     ];
     const handleCardClick = (projectDetails) => {
