@@ -7,3 +7,22 @@ html {
     font-family: 'Noto Serif','Arial';
     scroll-behavior: smooth;
 }
+
+@layer base {
+  :root {
+        --radius: 0.5rem;
+    }
+}
+::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3b3b3b;
+  }

@@ -6,30 +6,25 @@ const Footer = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedProject, setSelectedProject] = useState(null);
 
-    const projectDetails = [
+    const modalPages = [
         {
-            title: 'Lung Disease Classification using GAN',
-            description: ['Designed an advanced GAN for lung disease classification with 5,000+ chest X-ray images.', 'Employed diverse GAN architectures like DCGAN, ACGAN and WGAN GP to improve binary imageclassification in medical datasets.', 'Applied a stacking classifier with GAN features, achieving 98.7% classification accuracy.'],
-            image: '/jpg'
-        },
-        {
-            title: 'Recommendation System ',
+            title: 'About',
             description: 'Description',
             image: '/jpg'
         },
         {
-            title: 'VyavaSahayak',
+            title: 'Projects',
             description: 'Description',
             image: '/jpg'
         },
         {
-            title: 'Chat Application',
+            title: 'Contact',
             description: 'Description',
-            image: '/.jpg'
-        }
+            image: '/jpg'
+        },
     ];
-    const handleCardClick = (projectDetails) => {
-        setSelectedProject(projectDetails);
+    const handleCardClick = (modalPages) => {
+        setSelectedProject(modalPages);
         setIsModalOpen(true);
     };
     const handleCloseModal = () => {
@@ -39,10 +34,10 @@ const Footer = () => {
     return (
         <div className="flex bg-[url('/white.jpg')] w-[700px] h-[170px] justify-end absolute bottom-0 left-20">
             <div className='flex justify-evenly w-full items-center'>
-                {projectDetails.map((project, index) => (
+                {modalPages.map((project, index) => (
                     <Card
                         key={index}
-                        projectDetails={project}
+                        modalPages={project}
                         onClick={handleCardClick}
                     />
                 ))}
@@ -50,7 +45,7 @@ const Footer = () => {
             <Modal
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
-                projectDetails={selectedProject}
+                modalPages={selectedProject}
             />
         </div>
     )

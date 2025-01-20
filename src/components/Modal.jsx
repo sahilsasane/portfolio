@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
+import About from './About';
+import Project from './Project';
 
-const Modal = ({ isOpen, onClose, projectDetails }) => {
+const Modal = ({ isOpen, onClose, modalPages }) => {
     const [visible, setVisible] = React.useState(false);
 
     useEffect(() => {
@@ -37,34 +39,21 @@ const Modal = ({ isOpen, onClose, projectDetails }) => {
                 onClick={onClose}
             >
                 <div
-                    className={`flex justify-center items-center w-full h-full`}
+                    className={`flex justify-center items-center w-full h-[100vh]`}
                 >
                     <div
-                        className={`bg-gray-200 bg-opacity-95 w-[800px] rounded-sm p-6 relative ${isOpen ? 'modalContentOpen' : 'modalContentClose'}`}
+                        className={`bg-[url('white.jpg')] bg-opacity-95 w-[1300px] h-full p-6 relative overflow-y-auto ${isOpen ? 'modalContentOpen' : 'modalContentClose'}`}
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
-                            className="absolute top-4 right-4 text-black hover:text-gray-500 font-bold hover:scale-125 duration-[500ms]"
+                            className="absolute top-4 right-4 text-black hover:text-gray-500 font-bold hover:scale-125 duration-500"
                             onClick={onClose}
                         >
                             <CloseIcon />
                         </button>
-                        {projectDetails &&
-                            <div>
-                                <h2 className="text-2xl font-light mb-4">{projectDetails.title}</h2>
-                                <img src={projectDetails.image} alt={projectDetails.title} className="w-full mb-4 rounded-lg" />
-                                {projectDetails.description && Array.isArray(projectDetails.description) ? (
-                                    <ul className="list-disc pl-5 mb-4">
-                                        {projectDetails.description.map((item, index) => (
-                                            <li className='py-2' key={index}>{item}</li>
-                                        ))}
-                                    </ul>
-                                ) : (
-                                    <p>{projectDetails.description}</p>
-                                )}
+                        {modalPages && modalPages.title === "About" && <About />}
+                        {modalPages && modalPages.title === "Projects" && <Project />}
 
-                            </div>
-                        }
                     </div>
                 </div>
             </div>
