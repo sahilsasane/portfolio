@@ -1,14 +1,23 @@
 import { Github, Mail, Linkedin, Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { GitHub, LinkedIn, Twitter } from "@mui/icons-material";
 import { useState, useEffect } from "react";
 
+
 export default function Port() {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [windowWidth, setWindowWidth] = useState(0);
+    const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
+        setIsMounted(true);
+        setWindowWidth(window.innerWidth);
+
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
         const handleScroll = () => {
             const isScrolled = window.scrollY > 10;
             if (isScrolled !== scrolled) {
@@ -16,8 +25,11 @@ export default function Port() {
             }
         };
 
+        window.addEventListener('resize', handleResize);
         window.addEventListener('scroll', handleScroll);
+
         return () => {
+            window.removeEventListener('resize', handleResize);
             window.removeEventListener('scroll', handleScroll);
         };
     }, [scrolled]);
@@ -25,6 +37,13 @@ export default function Port() {
     const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
 
     const closeMenu = () => setMobileMenuOpen(false);
+
+    const handleHomeClick = (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.history.pushState('', document.title, window.location.pathname);
+        closeMenu();
+    };
 
     return (
         <div className="min-h-screen bg-black text-white">
@@ -36,7 +55,7 @@ export default function Port() {
                 <nav className="hidden md:block">
                     <ul className="flex space-x-6">
                         <li>
-                            <a href="" className="hover:text-gray-300 transition-colors" onClick={(e) => {
+                            <a href="#" className="hover:text-gray-300 transition-colors" onClick={(e) => {
                                 e.preventDefault();
                                 window.scrollTo({ top: 0, behavior: 'smooth' });
                             }}>
@@ -68,45 +87,49 @@ export default function Port() {
 
                 {/* Mobile Menu Button */}
                 <button
-                    className="md:hidden text-white focus:outline-none"
+                    className="md:hidden text-white focus:outline-none transition-transform duration-300 ease-in-out"
                     onClick={toggleMenu}
                 >
-                    {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    {mobileMenuOpen ? <X size={24} className="rotate-90 transition-transform duration-300" /> : <Menu size={24} />}
                 </button>
             </header>
 
             {/* Mobile Navigation Menu */}
-            {mobileMenuOpen && (
-                <div className="fixed inset-0 bg-black z-40 pt-20 px-4 flex flex-col md:hidden">
+            <div
+                className={`fixed inset-0 bg-black z-40 transform transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+                    } md:hidden`}
+            >
+                <div className="pt-20 px-4 flex flex-col">
                     <ul className="flex flex-col space-y-6 items-center text-lg">
-                        <li>
-                            <a href="#intro" className="hover:text-gray-300 transition-colors" onClick={closeMenu}>
+                        <li className={`transform transition-all duration-300 ${mobileMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'
+                            }`} style={{ transitionDelay: '0ms' }}>
+                            <a
+                                href="#"
+                                className="hover:text-gray-300 transition-colors"
+                                onClick={handleHomeClick}
+                            >
                                 Home
                             </a>
                         </li>
-                        <li>
-                            <a href="#experience" className="hover:text-gray-300 transition-colors" onClick={closeMenu}>
-                                Experience
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#about" className="hover:text-gray-300 transition-colors" onClick={closeMenu}>
-                                About
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#projects" className="hover:text-gray-300 transition-colors" onClick={closeMenu}>
-                                Projects
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#contact" className="hover:text-gray-300 transition-colors" onClick={closeMenu}>
-                                Contact
-                            </a>
-                        </li>
+                        {['Experience', 'About', 'Projects', 'Contact'].map((item, index) => (
+                            <li
+                                key={item}
+                                className={`transform transition-all duration-300 ${mobileMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'
+                                    }`}
+                                style={{ transitionDelay: `${(index + 1) * 100}ms` }}
+                            >
+                                <a
+                                    href={`#${item.toLowerCase()}`}
+                                    className="hover:text-gray-300 transition-colors"
+                                    onClick={closeMenu}
+                                >
+                                    {item}
+                                </a>
+                            </li>
+                        ))}
                     </ul>
                 </div>
-            )}
+            </div>
 
             <main className="container mx-auto px-4">
                 {/* Intro Section */}
@@ -122,7 +145,7 @@ export default function Port() {
                                     rel="noopener noreferrer"
                                     className="bg-white p-3 md:p-4 rounded-2xl flex h-12 md:h-16 hover:scale-110 duration-500 transform transition-transform cursor-pointer z-10 text-black"
                                 >
-                                    <LinkedIn fontSize={window.innerWidth < 768 ? "medium" : "large"} />
+                                    {isMounted && <LinkedIn fontSize={windowWidth < 768 ? "medium" : "large"} />}
                                 </a>
                                 <a
                                     href="https://github.com/sahilsasane"
@@ -130,7 +153,7 @@ export default function Port() {
                                     rel="noopener noreferrer"
                                     className="bg-white p-3 md:p-4 rounded-2xl flex h-12 md:h-16 hover:scale-110 duration-500 transform transition-transform cursor-pointer z-10 text-black"
                                 >
-                                    <GitHub fontSize={window.innerWidth < 768 ? "medium" : "large"} />
+                                    {isMounted && <GitHub fontSize={windowWidth < 768 ? "medium" : "large"} />}
                                 </a>
                                 <a
                                     href="https://twitter.com"
@@ -138,7 +161,7 @@ export default function Port() {
                                     rel="noopener noreferrer"
                                     className="bg-white p-3 md:p-4 rounded-2xl flex h-12 md:h-16 hover:scale-110 duration-500 transform transition-transform cursor-pointer z-10 text-black"
                                 >
-                                    <Twitter fontSize={window.innerWidth < 768 ? "medium" : "large"} />
+                                    {isMounted && <Twitter fontSize={windowWidth < 768 ? "medium" : "large"} />}
                                 </a>
                             </div>
                             <div className="bg-white p-3 md:p-4 rounded-2xl">
@@ -148,7 +171,7 @@ export default function Port() {
                                     rel="noopener noreferrer"
                                     className="flex hover:scale-110 duration-350 transform transition-transform cursor-pointer z-10"
                                 >
-                                    <img src="/cv.png" alt="CV" className="h-8 md:h-auto" />
+                                    <img src="/cv.png" alt="CV" className="" />
                                 </a>
                             </div>
                         </div>
@@ -156,9 +179,9 @@ export default function Port() {
                 </section>
 
                 {/* Experience Section */}
-                <section id="experience" className="py-16 md:py-24 lg:py-48 scroll-mt-20">
-                    <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-10 border-b border-gray-800 pb-4">Experience</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                <section id="experience" className="py-32 md:mt-20 scroll-mt-16 md:scroll-mt-20">
+                    <h2 className="text-3xl font-bold mb-10 border-b border-gray-800 pb-4">Experience</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <ExperienceCard
                             title="AI/ML Developer Intern"
                             company="Vsure Consultancy Services"
@@ -171,33 +194,45 @@ export default function Port() {
                             period="2020 - 2022"
                             description="Developed web scrapers with Selenium and threading, increasing data retrieval speed by 80%. *Integrated RESTful APIs for real-time data ingestion, improving data freshness by 90%. *Optimized MySQL schema, reducing query response times by 35% and improving database performance."
                         />
+                        {/* <ExperienceCard
+                            title="ML Research Assistant"
+                            company="AI Research Lab"
+                            period="2018 - 2020"
+                            description="Conducted research on deep learning algorithms for computer vision. Published papers on image recognition and contributed to open-source ML libraries."
+                        />
+                        <ExperienceCard
+                            title="Software Engineer Intern"
+                            company="Tech Startup"
+                            period="2017 - 2018"
+                            description="Developed backend services using Python and Django. Worked on data processing pipelines and implemented RESTful APIs."
+                        /> */}
                     </div>
                 </section>
 
                 {/* About Me Section */}
-                <section id="about" className="py-16 md:py-24 scroll-mt-20">
-                    <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-10 border-b border-gray-800 pb-4">About Me</h2>
-                    <div className="bg-gray-900 p-4 md:p-8 rounded-lg">
-                        <p className="text-base md:text-lg leading-relaxed">
+                <section id="about" className="py-20 scroll-mt-16 md:scroll-mt-20">
+                    <h2 className="text-3xl font-bold mb-10 border-b border-gray-800 pb-4">About Me</h2>
+                    <div className="bg-gray-900 p-8 rounded-lg">
+                        <p className="text-lg leading-relaxed">
                             I'm a passionate Full Stack AI/ML Developer with over 5 years of experience building intelligent
                             applications that solve real-world problems. My journey in technology began with a deep curiosity about
                             how machines can learn and make decisions, which led me to pursue a degree in Computer Science with a
                             specialization in Artificial Intelligence.
                         </p>
-                        <p className="text-base md:text-lg leading-relaxed mt-4">
+                        <p className="text-lg leading-relaxed mt-4">
                             Throughout my career, I've worked across the entire stack, from designing intuitive user interfaces with
                             React and Next.js to implementing complex backend systems with Python, Node.js, and various ML frameworks
                             like TensorFlow and PyTorch. I'm particularly interested in the intersection of web technologies and
                             machine learning, creating applications that not only look good but also leverage the power of AI to
                             provide unique value.
                         </p>
-                        <p className="text-base md:text-lg leading-relaxed mt-4">
+                        <p className="text-lg leading-relaxed mt-4">
                             My expertise includes natural language processing, computer vision, predictive analytics, and
                             recommendation systems. I'm also experienced in data engineering, having built robust data pipelines that
                             feed ML models with clean, processed data. I believe in writing clean, maintainable code and following
                             best practices in software development.
                         </p>
-                        <p className="text-base md:text-lg leading-relaxed mt-4">
+                        <p className="text-lg leading-relaxed mt-4">
                             When I'm not coding, I enjoy contributing to open-source projects, writing technical articles, and
                             mentoring aspiring developers. I'm constantly learning and exploring new technologies to stay at the
                             forefront of this rapidly evolving field.
@@ -206,9 +241,9 @@ export default function Port() {
                 </section>
 
                 {/* Projects Section */}
-                <section id="projects" className="py-16 md:py-24 scroll-mt-20">
-                    <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-10 border-b border-gray-800 pb-4">Projects</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+                <section id="projects" className="py-20 scroll-mt-16 md:scroll-mt-20">
+                    <h2 className="text-3xl font-bold mb-10 border-b border-gray-800 pb-4">Projects</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <ProjectCard
                             title="Vayu"
                             description="A web application that uses GPT models to generate high-quality content for various purposes. Built with Next.js, Node.js, and OpenAI API."
@@ -219,7 +254,7 @@ export default function Port() {
                             title="Cautious Memory"
                             description="A recommendation system for an e-commerce platform. Implemented with collaborative filtering algorithms and deployed on Azure."
                             tags={["Python", "Scikit-learn", "Azure"]}
-                            image=""
+                            image="/placeholder.svg?height=200&width=400"
                         />
                         <ProjectCard
                             title="Pneumonia Detection Using GANs"
@@ -227,6 +262,7 @@ export default function Port() {
                             tags={["/tech/express.svg", "/tech/flutter.svg", "/tech/gemini.svg", "/tech/mongo.svg"]}
                             image="/major.png"
                         />
+
                         <ProjectCard
                             title="Link"
                             description="Job and Internship Portal for students."
@@ -237,7 +273,7 @@ export default function Port() {
                             title="VyavaSahayak"
                             description="A dashboard for visualizing and analyzing real-time data streams. Built with D3.js, Socket.io, and Express."
                             tags={["/tech/express.svg", "/tech/gemini.svg", "/tech/mongo.svg"]}
-                            image=""
+                            image="/placeholder.svg?height=200&width=400"
                         />
                         <ProjectCard
                             title="ml from scratch"
@@ -261,35 +297,42 @@ export default function Port() {
                 </section>
 
                 {/* Contact Section */}
-                <section id="contact" className="py-16 md:py-24 scroll-mt-20">
-                    <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-10 border-b border-gray-800 pb-4">Contact</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+                <section id="contact" className="py-20 scroll-mt-16 md:scroll-mt-20">
+                    <h2 className="text-3xl font-bold mb-10 border-b border-gray-800 pb-4">Contact</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                         <div>
-                            <h3 className="text-lg md:text-xl font-semibold mb-4">Get In Touch</h3>
+                            <h3 className="text-xl font-semibold mb-4">Get In Touch</h3>
                             <p className="text-gray-400 mb-6">
                                 Feel free to reach out if you're looking for a developer, have a question, or just want to connect.
                             </p>
                             <div className="space-y-4">
                                 <div className="flex items-center">
                                     <Mail className="h-5 w-5 mr-3" />
-                                    <span className="break-all">shsasane22@gmail.com</span>
+                                    <a href="">
+                                        <span>shsasane22@gmail.com</span>
+                                    </a>
                                 </div>
                                 <div className="flex items-center">
                                     <Github className="h-5 w-5 mr-3" />
-                                    <span className="break-all">github.com/sahilsasane</span>
+                                    <a href="https://github.com/sahilsasane" target="_blank">
+                                        <span>github.com/sahilsasane</span>
+                                    </a>
                                 </div>
                                 <div className="flex items-center">
                                     <Linkedin className="h-5 w-5 mr-3" />
-                                    <span className="break-all">linkedin.com/in/sahil-dev</span>
+                                    <a href="https://www.linkedin.com/in/sahil-sasane/" target="_blank">
+                                        <span>linkedin.com/in/sahil-sasane</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </section>
             </main>
 
             {/* Footer */}
-            <footer className="bg-gray-900 py-6 md:py-8">
+            <footer className="bg-gray-950 py-8">
                 <div className="container mx-auto px-4 text-center">
                     <p>© {new Date().getFullYear()} Sahil. All rights reserved.</p>
                 </div>
@@ -307,14 +350,14 @@ function ExperienceCard({
     const descriptionPoints = description.split('*').filter(point => point.trim());
     return (
         <Card className="bg-gray-900 border-gray-800 text-white">
-            <CardHeader className="p-4 md:p-6">
-                <CardTitle className="text-base md:text-lg lg:text-xl">{title}</CardTitle>
-                <CardDescription className="text-sm md:text-base">
+            <CardHeader>
+                <CardTitle>{title}</CardTitle>
+                <CardDescription>
                     {company} | {period}
                 </CardDescription>
             </CardHeader>
-            <CardContent className="p-4 md:p-6 pt-0">
-                <ul className="list-disc pl-5 space-y-1 text-sm md:text-base">
+            <CardContent>
+                <ul className="list-disc pl-5 space-y-1">
                     {descriptionPoints.map((point, index) => (
                         <li key={index}>{point.replace(/^◦\s*/, '')}</li>
                     ))}
@@ -332,27 +375,20 @@ function ProjectCard({
 }) {
     return (
         <Card className="bg-gray-900 border-gray-800 overflow-hidden text-white h-full flex flex-col">
-            <div className="h-32 sm:h-40 md:h-48 relative">
-                <img
-                    src={image || ""}
-                    alt={title}
-                    className="h-full w-full object-cover"
-                    onError={(e) => {
-                        e.target.src = "";
-                    }}
-                />
+            <div className="h-48 relative">
+                <img src={image || "/placeholder.svg"} alt={title} className="h-full w-full object-cover" />
             </div>
-            <CardHeader className="p-3 md:p-4">
-                <CardTitle className="text-base md:text-lg">{title}</CardTitle>
+            <CardHeader>
+                <CardTitle>{title}</CardTitle>
             </CardHeader>
-            <CardContent className="flex-1 flex flex-col justify-between p-3 md:p-4 pt-0">
+            <CardContent className="flex-1 flex flex-col justify-between">
                 <div>
-                    <p className="mb-4 text-sm md:text-base">{description}</p>
+                    <p className="mb-4">{description}</p>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-auto">
                     {tags.map((tag, index) => (
-                        <span key={index} className="px-1 py-0.5 md:px-2 md:py-1 bg-white rounded-md text-xs md:text-sm">
-                            <img src={tag} alt="" className="h-4 md:h-5" />
+                        <span key={index} className="px-2 py-1 bg-white rounded-md text-sm">
+                            <img src={tag} alt="" />
                         </span>
                     ))}
                 </div>
