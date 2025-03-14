@@ -1,11 +1,12 @@
 import './App.css'
 import Home from './pages/Home'
+import Port from './pages/Page';
 
 function App() {
 
   return (
-    <div className="bg-gray-950 h-screen flex justify-center" >
-      <Home />
+    <div className="bg-black flex justify-center" >
+      <Port />
     </div>
   )
 }
