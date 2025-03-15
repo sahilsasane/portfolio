@@ -48,7 +48,7 @@ export default function Port() {
     return (
         <div className="min-h-screen bg-black text-white">
             {/* Header */}
-            <header className={`sticky top-0 z-50 w-full bg-black py-4 md:py-6 px-4 flex justify-between items-center ${scrolled ? 'border-gray-800' : 'border-transparent'} transition-all duration-300`}>
+            <header className={`sticky top-0 z-50 w-full bg-black pt-6 pb-4 md:py-6 px-4 flex justify-between items-center ${scrolled ? 'border-gray-800' : 'border-transparent'} transition-all duration-300`}>
                 <div className="max-w-5xl mx-auto w-full flex justify-between items-center">
                     <h1 className="text-xl md:text-2xl">Sahil Sasane</h1>
                     {/* Desktop Navigation */}
@@ -210,7 +210,7 @@ export default function Port() {
 
                 {/* About Me Section */}
                 <section id="about" className="py-5 scroll-mt-16 md:scroll-mt-20">
-                    <h2 className="text-xl font-bold mb-10 border-b border-gray-900 pb-4">About Me</h2>
+                    <h2 className="text-xl font-bold mb-10 border-b border-gray-900 md:pb-4">About Me</h2>
                     <div className="bg-black p-8 rounded-lg">
                         <p className="text-sm leading-relaxed  md:text-lg">
                             I’m Sahil, a final-year Computer Science engineering student specializing in AI/ML, with over a year of hands-on experience in AI, backend, and automation. My work spans multi-agent architectures, advanced AI applications, and scalable backend systems.
@@ -241,7 +241,7 @@ export default function Port() {
                         />
                         <ProjectCard
                             title="Cautious Memory"
-                            description="Go-based API project designed with a focus on clean architecture, security, and scalability."
+                            description="Go-based API with clean architecture, security, and scalability."
                             tags={["/tech/go_black.svg", "/tech/postgresql.svg"]}
                             image="/golang-large.png"
                             projectLink="https://github.com/sahilsasane/cautious-memory"
@@ -262,7 +262,7 @@ export default function Port() {
                         />
                         <ProjectCard
                             title="VyavaSahayak - Bhashini Sprint"
-                            description="Comprehensive platform for ecommerce presence management."
+                            description="Platform for ecommerce presence management."
                             tags={["/tech/express.svg", "/tech/gemini.svg", "/tech/mongo.svg"]}
                             image="/bhashini.jpg"
                             projectLink="https://github.com/nishaaannnt/q-star-bhashini"
@@ -276,7 +276,7 @@ export default function Port() {
                         />
                         <ProjectCard
                             title="LLM-Based AI Agent"
-                            description="Enables users to analyze statistics from CSV or Excel sheets through natural language queries."
+                            description="Analyzes CSV/Excel statistics via natural language queries."
                             tags={["/tech/python.svg", "/tech/langchain.svg", "/tech/fastapi.svg"]}
                             image="/rag.png"
                             projectLink="https://github.com/sahilsasane/llm-yolo/tree/main/Part%201"
@@ -296,7 +296,7 @@ export default function Port() {
                     <h2 className="text-xl font-bold mb-10 border-b border-gray-900 pb-4">Contact</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                         <div>
-                            <h3 className="text-xl font-semibold mb-4">Get In Touch</h3>
+                            <h3 className="text-md md:text-xl font-semibold mb-4">Get In Touch</h3>
                             <p className="text-gray-400 mb-6">
                                 Feel free to reach out if you're looking for a developer, have a question, or just want to connect.
                             </p>
@@ -373,13 +373,13 @@ function ProjectCard({
         <a href={projectLink} target="_blank" rel="noopener noreferrer" className="block no-underline w-full">
             <Card className="bg-black border-gray-950 overflow-hidden text-white flex flex-row h-40 hover:border-gray-900 transition-colors rounded-md" >
                 {/* Image on the left */}
-                <div className="w-48 relative">
+                <div className="w-32 md:w-48 relative">
                     <img src={image || "/placeholder.svg"} alt={title} className="h-full w-full object-cover" />
                 </div>
 
                 {/* Content in the middle */}
                 <div className="flex flex-col flex-1 p-4">
-                    <h3 className="text-lg font-bold mb-2">{title}</h3>
+                    <h3 className="text-sm md:text-lg font-bold mb-2">{title}</h3>
                     <p className="text-sm flex-1">{description}</p>
                 </div>
 
