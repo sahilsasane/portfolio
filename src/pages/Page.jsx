@@ -188,9 +188,9 @@ export default function Port() {
                             description="Built multi-agent systems with LangChain & LangGraph, managing 5+ agents on a FastAPI backend. *Built a WebSocket-based chat system with 1000+ messages and dynamic context updates. *Optimized backend architectures, focusing on schema design, agent structures, and context management. *Worked on AI-driven applications, specializing in backend development and agent orchestration."
                         />
                         <ExperienceCard
-                            title="Full Stack Developer"
-                            company="DataDriven Solutions"
-                            period="2020 - 2022"
+                            title="Data Engineer Intern"
+                            company="Blank Analytica"
+                            period="Oct 2024 – Dec 2024"
                             description="Developed web scrapers with Selenium and threading, increasing data retrieval speed by 80%. *Integrated RESTful APIs for real-time data ingestion, improving data freshness by 90%. *Optimized MySQL schema, reducing query response times by 35% and improving database performance."
                         />
                         {/* <ExperienceCard
