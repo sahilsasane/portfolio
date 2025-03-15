@@ -133,7 +133,7 @@ export default function Port() {
 
             <main className="container mx-auto px-4">
                 {/* Intro Section */}
-                <section id="intro" className="py-16 md:py-20 flex flex-col items-center justify-center min-h-[80vh]">
+                <section id="intro" className="py-16 md:py-20 flex flex-col items-center justify-center h-screen">
                     <div className="text-center">
                         <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 md:mb-6">Sahil Sasane</h1>
                         <h2 className="text-xl sm:text-2xl md:text-3xl text-gray-400 mb-6 md:mb-8">Full Stack AI/ML Developer</h2>
@@ -179,7 +179,7 @@ export default function Port() {
                 </section>
 
                 {/* Experience Section */}
-                <section id="experience" className="py-32 md:mt-20 scroll-mt-16 md:scroll-mt-20">
+                <section id="experience" className="py-5 scroll-mt-16 md:scroll-mt-20">
                     <h2 className="text-3xl font-bold mb-10 border-b border-gray-800 pb-4">Experience</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <ExperienceCard
@@ -210,88 +210,84 @@ export default function Port() {
                 </section>
 
                 {/* About Me Section */}
-                <section id="about" className="py-20 scroll-mt-16 md:scroll-mt-20">
+                <section id="about" className="py-5 scroll-mt-16 md:scroll-mt-20">
                     <h2 className="text-3xl font-bold mb-10 border-b border-gray-800 pb-4">About Me</h2>
                     <div className="bg-gray-900 p-8 rounded-lg">
-                        <p className="text-lg leading-relaxed">
-                            I'm a passionate Full Stack AI/ML Developer with over 5 years of experience building intelligent
-                            applications that solve real-world problems. My journey in technology began with a deep curiosity about
-                            how machines can learn and make decisions, which led me to pursue a degree in Computer Science with a
-                            specialization in Artificial Intelligence.
+                        <p className="text-sm leading-relaxed  md:text-lg">
+                            I’m Sahil, a final-year Computer Science engineering student specializing in AI/ML, with over a year of hands-on experience in AI, backend, and automation. My work spans multi-agent architectures, advanced AI applications, and scalable backend systems.
                         </p>
-                        <p className="text-lg leading-relaxed mt-4">
-                            Throughout my career, I've worked across the entire stack, from designing intuitive user interfaces with
-                            React and Next.js to implementing complex backend systems with Python, Node.js, and various ML frameworks
-                            like TensorFlow and PyTorch. I'm particularly interested in the intersection of web technologies and
-                            machine learning, creating applications that not only look good but also leverage the power of AI to
-                            provide unique value.
+                        <p className="text-sm leading-relaxed mt-4 md:text-lg">
+                            I’ve won the Google GenAI Hackathon 2024 and secured the runner-up position in the Bhashini Sprint 2024, competing with top startups. I’ve also placed in the top ranks of multiple hackathons, including HackCelestial and HackOverflow.
                         </p>
-                        <p className="text-lg leading-relaxed mt-4">
-                            My expertise includes natural language processing, computer vision, predictive analytics, and
-                            recommendation systems. I'm also experienced in data engineering, having built robust data pipelines that
-                            feed ML models with clean, processed data. I believe in writing clean, maintainable code and following
-                            best practices in software development.
+                        <p className="text-sm leading-relaxed mt-4 md:text-lg">
+                            My technical expertise includes Python, C++, Golang, and JavaScript, along with frameworks like PyTorch, React.js, FastAPI, and LangChain. I’ve built AI-driven applications, including a multi-agent system using LangGraph and a Retrieval-Augmented Generation (RAG) pipeline with Llama and Qdrant.
                         </p>
-                        <p className="text-lg leading-relaxed mt-4">
-                            When I'm not coding, I enjoy contributing to open-source projects, writing technical articles, and
-                            mentoring aspiring developers. I'm constantly learning and exploring new technologies to stay at the
-                            forefront of this rapidly evolving field.
+                        <p className="text-sm leading-relaxed mt-4 md:text-lg">
+                            Currently, I’m an AI/ML Developer Intern at Vsure Consultancy Services, working on backend architectures and agent orchestration. Previously, I was a Data Engineer Intern at Blank Analytica, optimizing data pipelines and automation workflows.
                         </p>
                     </div>
                 </section>
 
+
                 {/* Projects Section */}
-                <section id="projects" className="py-20 scroll-mt-16 md:scroll-mt-20">
+                <section id="projects" className="py-5 scroll-mt-16 md:scroll-mt-20">
                     <h2 className="text-3xl font-bold mb-10 border-b border-gray-800 pb-4">Projects</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <ProjectCard
                             title="Vayu"
-                            description="A web application that uses GPT models to generate high-quality content for various purposes. Built with Next.js, Node.js, and OpenAI API."
+                            description="A mental health app for GenZ, built with Flutter and Express."
                             tags={["/tech/express.svg", "/tech/flutter.svg", "/tech/gemini.svg", "/tech/mongo.svg"]}
                             image="/vayu.png"
+                            projectLink="https://vayu-one.vercel.app/"
                         />
                         <ProjectCard
                             title="Cautious Memory"
-                            description="A recommendation system for an e-commerce platform. Implemented with collaborative filtering algorithms and deployed on Azure."
-                            tags={["Python", "Scikit-learn", "Azure"]}
-                            image="/placeholder.svg?height=200&width=400"
+                            description="Go-based API project designed with a focus on clean architecture, security, and scalability."
+                            tags={["/tech/go_black.svg", "/tech/postgresql.svg"]}
+                            image="/golang-large.png"
+                            projectLink="https://github.com/sahilsasane/cautious-memory"
                         />
                         <ProjectCard
                             title="Pneumonia Detection Using GANs"
-                            description="A system that analyzes in-store customer behavior using computer vision. Implemented with PyTorch, OpenCV, and deployed on AWS."
-                            tags={["/tech/express.svg", "/tech/flutter.svg", "/tech/gemini.svg", "/tech/mongo.svg"]}
+                            description="GAN model designed to generate realistic images and binary classification."
+                            tags={["/tech/python.svg", "/tech/pytorch.svg"]}
                             image="/major.png"
+                            projectLink="https://github.com/sahilsasane/GAN-major"
                         />
-
                         <ProjectCard
                             title="Link"
                             description="Job and Internship Portal for students."
-                            tags={["/tech/express.svg", "/tech/flutter.svg", "/tech/gemini.svg", "/tech/mongo.svg"]}
+                            tags={["/tech/express.svg", "/tech/react.svg", "/tech/mongo.svg"]}
                             image="/hackcelestial.png"
+                            projectLink="https://hackcelestial.vercel.app/"
                         />
                         <ProjectCard
                             title="VyavaSahayak"
-                            description="A dashboard for visualizing and analyzing real-time data streams. Built with D3.js, Socket.io, and Express."
+                            description="Comprehensive platform for ecommerce presence management."
                             tags={["/tech/express.svg", "/tech/gemini.svg", "/tech/mongo.svg"]}
-                            image="/placeholder.svg?height=200&width=400"
+                            image="/bhashini.jpg"
+                            projectLink="https://github.com/nishaaannnt/q-star-bhashini"
                         />
                         <ProjectCard
-                            title="ml from scratch"
-                            description="Retrieval-Augmented Generation for enhanced AI responses."
-                            tags={["/tech/express.svg", "/tech/flutter.svg", "/tech/gemini.svg", "/tech/mongo.svg"]}
-                            image=""
+                            title="Micrograd"
+                            description="Backpropagation implementation from scratch"
+                            tags={["/tech/python.svg"]}
+                            image="/micrograd.png"
+                            projectLink="https://github.com/sahilsasane/micrograd"
                         />
                         <ProjectCard
-                            title="RAG"
-                            description="Retrieval-Augmented Generation for enhanced AI responses."
-                            tags={["/tech/express.svg", "/tech/flutter.svg", "/tech/gemini.svg", "/tech/mongo.svg"]}
+                            title="LLM-Based AI Agent"
+                            description="Enables users to analyze statistics from CSV or Excel sheets through natural language queries."
+                            tags={["/tech/python.svg", "/tech/langchain.svg", "/tech/fastapi.svg"]}
                             image="/rag.png"
+                            projectLink="https://github.com/sahilsasane/llm-yolo/tree/main/Part%201"
                         />
                         <ProjectCard
                             title="Lost & Found"
-                            description="Retrieval-Augmented Generation for enhanced AI responses."
-                            tags={["/tech/express.svg", "/tech/flutter.svg", "/tech/gemini.svg", "/tech/mongo.svg"]}
-                            image=""
+                            description="Help guardians find their lost children using facial recognition."
+                            tags={["/tech/python.svg", "/tech/flask.svg", "/tech/mysql.svg"]}
+                            image="/lost_and_found.png"
+                            projectLink="https://github.com/sahilsasane/Lost-Found"
                         />
                     </div>
                 </section>
@@ -334,7 +330,7 @@ export default function Port() {
             {/* Footer */}
             <footer className="bg-gray-950 py-8">
                 <div className="container mx-auto px-4 text-center">
-                    <p>© {new Date().getFullYear()} Sahil. All rights reserved.</p>
+                    <p className="text-sm md:text-lg">© {new Date().getFullYear()} Sahil. All rights reserved.</p>
                 </div>
             </footer>
         </div>
@@ -359,7 +355,7 @@ function ExperienceCard({
             <CardContent>
                 <ul className="list-disc pl-5 space-y-1">
                     {descriptionPoints.map((point, index) => (
-                        <li key={index}>{point.replace(/^◦\s*/, '')}</li>
+                        <li className="text-sm md:text-lg" key={index}>{point.replace(/^◦\s*/, '')}</li>
                     ))}
                 </ul>
             </CardContent>
@@ -372,6 +368,7 @@ function ProjectCard({
     description,
     tags,
     image,
+    projectLink
 }) {
     return (
         <Card className="bg-gray-900 border-gray-800 overflow-hidden text-white h-full flex flex-col">
@@ -383,15 +380,22 @@ function ProjectCard({
             </CardHeader>
             <CardContent className="flex-1 flex flex-col justify-between">
                 <div>
-                    <p className="mb-4">{description}</p>
+                    <p className="mb-4 text-sm md:text-lg">{description}</p>
                 </div>
-                <div className="flex flex-wrap gap-2 mt-auto">
-                    {tags.map((tag, index) => (
-                        <span key={index} className="px-2 py-1 bg-white rounded-md text-sm">
-                            <img src={tag} alt="" />
-                        </span>
-                    ))}
-                </div>
+                <a href={projectLink} target="_blank" rel="noopener noreferrer" className="text-white text-sm md:text-lg hover:text-gray-300">
+                    <div className="flex flex-wrap items-center justify-between mt-auto">
+                        <div className="flex flex-wrap gap-2">
+                            {tags.map((tag, index) => (
+                                <span key={index} className="px-2 py-1 bg-white rounded-md text-sm">
+                                    <img width={20} height={20} src={tag} alt="" />
+                                </span>
+                            ))}
+                        </div>
+                        <div className="ml-4">
+                            <span className="text-white text-xl hover:text-gray-300">→</span>
+                        </div>
+                    </div>
+                </a>
             </CardContent>
         </Card>
     )
