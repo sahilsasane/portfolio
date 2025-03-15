@@ -1,6 +1,6 @@
 import { Github, Mail, Linkedin, Menu, X } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { GitHub, LinkedIn, Twitter } from "@mui/icons-material";
+import { CallMade } from "@mui/icons-material";
 import { useState, useEffect } from "react";
 
 
@@ -49,49 +49,50 @@ export default function Port() {
         <div className="min-h-screen bg-black text-white">
             {/* Header */}
             <header className={`sticky top-0 z-50 w-full bg-black py-4 md:py-6 px-4 flex justify-between items-center ${scrolled ? 'border-gray-800' : 'border-transparent'} transition-all duration-300`}>
-                <h1 className="text-xl md:text-2xl font-bold">Sahil Sasane</h1>
+                <div className="max-w-5xl mx-auto w-full flex justify-between items-center">
+                    <h1 className="text-xl md:text-2xl">Sahil Sasane</h1>
+                    {/* Desktop Navigation */}
+                    <nav className="hidden md:block">
+                        <ul className="flex space-x-6">
+                            <li>
+                                <a href="#" className="hover:text-gray-300 transition-colors" onClick={(e) => {
+                                    e.preventDefault();
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }}>
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#experience" className="hover:text-gray-300 transition-colors">
+                                    Experience
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#about" className="hover:text-gray-300 transition-colors">
+                                    About
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#projects" className="hover:text-gray-300 transition-colors">
+                                    Projects
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#contact" className="hover:text-gray-300 transition-colors">
+                                    Contact
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
 
-                {/* Desktop Navigation */}
-                <nav className="hidden md:block">
-                    <ul className="flex space-x-6">
-                        <li>
-                            <a href="#" className="hover:text-gray-300 transition-colors" onClick={(e) => {
-                                e.preventDefault();
-                                window.scrollTo({ top: 0, behavior: 'smooth' });
-                            }}>
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#experience" className="hover:text-gray-300 transition-colors">
-                                Experience
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#about" className="hover:text-gray-300 transition-colors">
-                                About
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#projects" className="hover:text-gray-300 transition-colors">
-                                Projects
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#contact" className="hover:text-gray-300 transition-colors">
-                                Contact
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-
-                {/* Mobile Menu Button */}
-                <button
-                    className="md:hidden text-white focus:outline-none transition-transform duration-300 ease-in-out"
-                    onClick={toggleMenu}
-                >
-                    {mobileMenuOpen ? <X size={24} className="rotate-90 transition-transform duration-300" /> : <Menu size={24} />}
-                </button>
+                    {/* Mobile Menu Button */}
+                    <button
+                        className="md:hidden text-white focus:outline-none transition-transform duration-300 ease-in-out"
+                        onClick={toggleMenu}
+                    >
+                        {mobileMenuOpen ? <X size={24} className="rotate-90 transition-transform duration-300" /> : <Menu size={24} />}
+                    </button>
+                </div>
             </header>
 
             {/* Mobile Navigation Menu */}
@@ -131,47 +132,45 @@ export default function Port() {
                 </div>
             </div>
 
-            <main className="container mx-auto px-4">
+            <main className="max-w-5xl mx-auto px-4 md:px-8">
                 {/* Intro Section */}
                 <section id="intro" className="py-16 md:py-20 flex flex-col items-center justify-center h-screen">
                     <div className="text-center">
-                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 md:mb-6">Sahil Sasane</h1>
-                        <h2 className="text-xl sm:text-2xl md:text-3xl text-gray-400 mb-6 md:mb-8">Full Stack AI/ML Developer</h2>
+                        <h1 className="text-4xl sm:text-5xl md:text-6xl mb-4 md:mb-6">Sahil Sasane</h1>
+                        <h2 className="text-xl sm:text-2xl md:text-2xl text-gray-100 mb-6 md:mb-8">Full Stack AI/ML Developer</h2>
                         <div className="flex flex-col items-center justify-center gap-4">
                             <div className="flex justify-center items-center space-x-3 md:space-x-4">
                                 <a
                                     href="https://www.linkedin.com/in/sahil-sasane/"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="bg-white p-3 md:p-4 rounded-2xl flex h-12 md:h-16 hover:scale-110 duration-500 transform transition-transform cursor-pointer z-10 text-black"
+                                    className="bg-black p-3 md:p-4 rounded-2xl flex h-12 md:h-16 hover:text-gray-400 duration-500 transform transition-transform cursor-pointer z-10 text-white"
                                 >
-                                    {isMounted && <LinkedIn fontSize={windowWidth < 768 ? "medium" : "large"} />}
+                                    {isMounted && "linkedin"}
                                 </a>
                                 <a
                                     href="https://github.com/sahilsasane"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="bg-white p-3 md:p-4 rounded-2xl flex h-12 md:h-16 hover:scale-110 duration-500 transform transition-transform cursor-pointer z-10 text-black"
+                                    className="bg-black p-3 md:p-4 rounded-2xl flex h-12 md:h-16 hover:text-gray-400 duration-500 transform transition-transform cursor-pointer z-10 text-white"
                                 >
-                                    {isMounted && <GitHub fontSize={windowWidth < 768 ? "medium" : "large"} />}
+                                    {isMounted && "github"}
                                 </a>
                                 <a
                                     href="https://twitter.com"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="bg-white p-3 md:p-4 rounded-2xl flex h-12 md:h-16 hover:scale-110 duration-500 transform transition-transform cursor-pointer z-10 text-black"
+                                    className="bg-black p-3 md:p-4 rounded-2xl flex h-12 md:h-16 hover:text-gray-400 duration-500 transform transition-transform cursor-pointer z-10 text-white"
                                 >
-                                    {isMounted && <Twitter fontSize={windowWidth < 768 ? "medium" : "large"} />}
+                                    {isMounted && "twitter"}
                                 </a>
-                            </div>
-                            <div className="bg-white p-3 md:p-4 rounded-2xl">
                                 <a
                                     href="https://drive.google.com/file/d/1P2ZNiCE8M3cCQLZdK7bMFkfDCBBBnw9H/view?usp=sharing"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex hover:scale-110 duration-350 transform transition-transform cursor-pointer z-10"
+                                    className="bg-black p-3 md:p-4 rounded-2xl flex h-12 md:h-16 hover:text-gray-400 duration-500 transform transition-transform cursor-pointer z-10 text-white"
                                 >
-                                    <img src="/cv.png" alt="CV" className="" />
+                                    resume
                                 </a>
                             </div>
                         </div>
@@ -180,7 +179,7 @@ export default function Port() {
 
                 {/* Experience Section */}
                 <section id="experience" className="py-5 scroll-mt-16 md:scroll-mt-20">
-                    <h2 className="text-3xl font-bold mb-10 border-b border-gray-800 pb-4">Experience</h2>
+                    <h2 className="text-xl font-bold mb-10 border-b border-gray-900 pb-4">Experience</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <ExperienceCard
                             title="AI/ML Developer Intern"
@@ -211,8 +210,8 @@ export default function Port() {
 
                 {/* About Me Section */}
                 <section id="about" className="py-5 scroll-mt-16 md:scroll-mt-20">
-                    <h2 className="text-3xl font-bold mb-10 border-b border-gray-800 pb-4">About Me</h2>
-                    <div className="bg-gray-900 p-8 rounded-lg">
+                    <h2 className="text-xl font-bold mb-10 border-b border-gray-900 pb-4">About Me</h2>
+                    <div className="bg-black p-8 rounded-lg">
                         <p className="text-sm leading-relaxed  md:text-lg">
                             I’m Sahil, a final-year Computer Science engineering student specializing in AI/ML, with over a year of hands-on experience in AI, backend, and automation. My work spans multi-agent architectures, advanced AI applications, and scalable backend systems.
                         </p>
@@ -231,8 +230,8 @@ export default function Port() {
 
                 {/* Projects Section */}
                 <section id="projects" className="py-5 scroll-mt-16 md:scroll-mt-20">
-                    <h2 className="text-3xl font-bold mb-10 border-b border-gray-800 pb-4">Projects</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <h2 className="text-xl font-bold mb-10 border-b border-gray-900 pb-4">Projects</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 ">
                         <ProjectCard
                             title="Vayu - Google GenAI Hackathon"
                             description="A mental health app for GenZ, built with Flutter and Express."
@@ -248,8 +247,8 @@ export default function Port() {
                             projectLink="https://github.com/sahilsasane/cautious-memory"
                         />
                         <ProjectCard
-                            title="Pneumonia Detection Using GANs"
-                            description="GAN model designed to generate realistic images and binary classification."
+                            title="Pneumonia GAN"
+                            description="GAN for realistic image generation and binary classification."
                             tags={["/tech/python.svg", "/tech/pytorch.svg"]}
                             image="/major.png"
                             projectLink="https://github.com/sahilsasane/GAN-major"
@@ -294,7 +293,7 @@ export default function Port() {
 
                 {/* Contact Section */}
                 <section id="contact" className="py-20 scroll-mt-16 md:scroll-mt-20">
-                    <h2 className="text-3xl font-bold mb-10 border-b border-gray-800 pb-4">Contact</h2>
+                    <h2 className="text-xl font-bold mb-10 border-b border-gray-900 pb-4">Contact</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                         <div>
                             <h3 className="text-xl font-semibold mb-4">Get In Touch</h3>
@@ -328,8 +327,8 @@ export default function Port() {
             </main>
 
             {/* Footer */}
-            <footer className="bg-gray-950 py-8">
-                <div className="container mx-auto px-4 text-center">
+            <footer className="bg-black py-8">
+                <div className="max-w-5xl mx-auto px-4 text-center">
                     <p className="text-sm md:text-lg">© {new Date().getFullYear()} Sahil. All rights reserved.</p>
                 </div>
             </footer>
@@ -345,7 +344,7 @@ function ExperienceCard({
 }) {
     const descriptionPoints = description.split('*').filter(point => point.trim());
     return (
-        <Card className="bg-gray-900 border-gray-800 text-white">
+        <Card className="bg-black border-black text-white">
             <CardHeader>
                 <CardTitle>{title}</CardTitle>
                 <CardDescription>
@@ -371,33 +370,28 @@ function ProjectCard({
     projectLink
 }) {
     return (
-        <Card className="bg-gray-900 border-gray-800 overflow-hidden text-white h-full flex flex-col">
-            <div className="h-48 relative">
-                <img src={image || "/placeholder.svg"} alt={title} className="h-full w-full object-cover" />
-            </div>
-            <CardHeader>
-                <CardTitle>{title}</CardTitle>
-            </CardHeader>
-            <CardContent className="flex-1 flex flex-col justify-between">
-                <div>
-                    <p className="mb-4 text-sm md:text-lg">{description}</p>
+        <a href={projectLink} target="_blank" rel="noopener noreferrer" className="block no-underline w-full">
+            <Card className="bg-black border-gray-950 overflow-hidden text-white flex flex-row h-40 hover:border-gray-900 transition-colors rounded-md" >
+                {/* Image on the left */}
+                <div className="w-48 relative">
+                    <img src={image || "/placeholder.svg"} alt={title} className="h-full w-full object-cover" />
                 </div>
-                <a href={projectLink} target="_blank" rel="noopener noreferrer" className="text-white text-sm md:text-lg hover:text-gray-300">
-                    <div className="flex flex-wrap items-center justify-between mt-auto">
-                        <div className="flex flex-wrap gap-2">
-                            {tags.map((tag, index) => (
-                                <span key={index} className="px-2 py-1 bg-white rounded-md text-sm">
-                                    <img width={20} height={20} src={tag} alt="" />
-                                </span>
-                            ))}
-                        </div>
-                        <div className="ml-4">
-                            <span className="text-white text-xl hover:text-gray-300">→</span>
-                        </div>
-                    </div>
-                </a>
-            </CardContent>
-        </Card>
+
+                {/* Content in the middle */}
+                <div className="flex flex-col flex-1 p-4">
+                    <h3 className="text-lg font-bold mb-2">{title}</h3>
+                    <p className="text-sm flex-1">{description}</p>
+                </div>
+
+                {/* Tags in vertical arrangement on the right */}
+                <div className="flex flex-col justify-center items-center p-4 gap-2 border-l border-gray-800">
+                    {tags.map((tag, index) => (
+                        <span key={index} className="px-2 py-1 bg-white rounded-md">
+                            <img width={20} height={20} src={tag} alt="" />
+                        </span>
+                    ))}
+                </div>
+            </Card>
+        </a>
     )
 }
-
