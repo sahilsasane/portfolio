@@ -166,7 +166,7 @@ export default function Port() {
                             </div>
                             <div className="bg-white p-3 md:p-4 rounded-2xl">
                                 <a
-                                    href="https://drive.google.com/file/d/1tEOc8mOWUl0zCAPI4QYK5QcBmmCoLTEu/view?usp=sharing"
+                                    href="https://drive.google.com/file/d/1P2ZNiCE8M3cCQLZdK7bMFkfDCBBBnw9H/view?usp=sharing"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex hover:scale-110 duration-350 transform transition-transform cursor-pointer z-10"
@@ -234,7 +234,7 @@ export default function Port() {
                     <h2 className="text-3xl font-bold mb-10 border-b border-gray-800 pb-4">Projects</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <ProjectCard
-                            title="Vayu"
+                            title="Vayu - Google GenAI Hackathon"
                             description="A mental health app for GenZ, built with Flutter and Express."
                             tags={["/tech/express.svg", "/tech/flutter.svg", "/tech/gemini.svg", "/tech/mongo.svg"]}
                             image="/vayu.png"
@@ -262,7 +262,7 @@ export default function Port() {
                             projectLink="https://hackcelestial.vercel.app/"
                         />
                         <ProjectCard
-                            title="VyavaSahayak"
+                            title="VyavaSahayak - Bhashini Sprint"
                             description="Comprehensive platform for ecommerce presence management."
                             tags={["/tech/express.svg", "/tech/gemini.svg", "/tech/mongo.svg"]}
                             image="/bhashini.jpg"
