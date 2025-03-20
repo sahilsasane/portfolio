@@ -384,7 +384,7 @@ function ProjectCard({
                 </div>
 
                 {/* Tags in vertical arrangement on the right */}
-                <div className="flex flex-col justify-center items-center p-4 gap-2 border-l border-gray-800">
+                <div className="flex flex-col justify-center items-center p-4 gap-2 border-l border-gray-950">
                     {tags.map((tag, index) => (
                         <span key={index} className="px-2 py-1 bg-white rounded-md">
                             <img width={20} height={20} src={tag} alt="" />
