@@ -1,6 +1,5 @@
 import { Github, Mail, Linkedin, Menu, X } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CallMade } from "@mui/icons-material";
 import { useState, useEffect } from "react";
 
 
@@ -182,9 +181,15 @@ export default function Port() {
                     <h2 className="text-xl font-bold mb-5 border-b border-gray-900 pb-4">Experience</h2>
                     <div className="grid grid-cols-1 md:grid-cols-1">
                         <ExperienceCard
+                            title="GenAI App Developer Intern"
+                            company="The Modern Data Company"
+                            period="May 2025 - Present"
+                            description=""
+                        />
+                        <ExperienceCard
                             title="AI/ML Developer Intern"
                             company="Vsure Consultancy Services"
-                            period="Dec 2024 – Present"
+                            period="Dec 2024 – May 2025"
                             description=""
                         />
                         <ExperienceCard
@@ -193,13 +198,8 @@ export default function Port() {
                             period="Oct 2024 – Dec 2024"
                             description=""
                         />
+
                         {/* <ExperienceCard
-                            title="ML Research Assistant"
-                            company="AI Research Lab"
-                            period="2018 - 2020"
-                            description="Conducted research on deep learning algorithms for computer vision. Published papers on image recognition and contributed to open-source ML libraries."
-                        />
-                        <ExperienceCard
                             title="Software Engineer Intern"
                             company="Tech Startup"
                             period="2017 - 2018"
@@ -210,7 +210,7 @@ export default function Port() {
 
                 {/* About Me Section */}
                 <section id="about" className="py-5 scroll-mt-16 md:scroll-mt-20">
-                    <h2 className="text-xl font-bold mb-10 border-b border-gray-900 md:pb-4">About Me</h2>
+                    <h2 className="text-xl font-bold mb-5 border-b border-gray-900 md:pb-4">About Me</h2>
                     <div className="bg-black p-8 rounded-lg">
                         <p className="text-sm leading-relaxed  md:text-lg">
                             I’m Sahil, a final-year Computer Science engineering student specializing in AI/ML, with over a year of hands-on experience in AI, backend, and automation. My work spans multi-agent architectures, advanced AI applications, and scalable backend systems.
@@ -230,7 +230,7 @@ export default function Port() {
 
                 {/* Projects Section */}
                 <section id="projects" className="py-5 scroll-mt-16 md:scroll-mt-20">
-                    <h2 className="text-xl font-bold mb-10 border-b border-gray-900 pb-4">Projects</h2>
+                    <h2 className="text-xl font-bold mb-5 border-b border-gray-900 pb-4">Projects</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 ">
                         <ProjectCard
                             title="Vayu - Google GenAI Hackathon"
@@ -292,11 +292,11 @@ export default function Port() {
                 </section>
 
                 {/* Contact Section */}
-                <section id="contact" className="py-20 scroll-mt-16 md:scroll-mt-20">
-                    <h2 className="text-xl font-bold mb-10 border-b border-gray-900 pb-4">Contact</h2>
+                <section id="contact" className="py-5 scroll-mt-16 md:scroll-mt-20">
+                    <h2 className="text-xl font-bold mb-5 border-b border-gray-900 pb-4">Contact</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                         <div>
-                            <h3 className="text-md md:text-xl font-semibold mb-4">Get In Touch</h3>
+                            <h3 className="text-md md:text-md font-semibold mb-1">Get In Touch</h3>
                             <p className="text-gray-400 mb-6">
                                 Feel free to reach out if you're looking for a developer, have a question, or just want to connect.
                             </p>
@@ -321,7 +321,6 @@ export default function Port() {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </section>
             </main>
@@ -348,7 +347,8 @@ function ExperienceCard({
             <CardHeader>
                 <CardTitle>{title}</CardTitle>
                 <CardDescription>
-                    {company} | {period}
+                    {company}
+                    <div className="">{period}</div>
                 </CardDescription>
             </CardHeader>
             <CardContent>
