@@ -211,19 +211,35 @@ export default function Port() {
                 {/* About Me Section */}
                 <section id="about" className="py-5 scroll-mt-16 md:scroll-mt-20">
                     <h2 className="text-xl font-bold mb-5 border-b border-gray-900 md:pb-4">About Me</h2>
-                    <div className="bg-black p-8 rounded-lg">
-                        <p className="text-sm leading-relaxed  md:text-lg">
-                            I’m Sahil, a final-year Computer Science engineering student specializing in AI/ML, with over a year of hands-on experience in AI, backend, and automation. My work spans multi-agent architectures, advanced AI applications, and scalable backend systems.
+                    <div className="bg-black p-8 pt-0 pb-0 rounded-lg">
+                        <p className="text-sm leading-relaxed md:text-base">
+                            I’m Sahil, a Computer Science graduate focused on AI/ML, backend systems, and automation. I build production-grade solutions using multi-agent architectures and scalable data workflows for both research and enterprise use cases.
                         </p>
-                        <p className="text-sm leading-relaxed mt-4 md:text-lg">
-                            I’ve won the Google GenAI Hackathon 2024 and secured the runner-up position in the Bhashini Sprint 2024, competing with top startups. I’ve also placed in the top ranks of multiple hackathons, including HackCelestial and HackOverflow.
-                        </p>
-                        <p className="text-sm leading-relaxed mt-4 md:text-lg">
-                            My technical expertise includes Python, C++, Golang, and JavaScript, along with frameworks like PyTorch, React.js, FastAPI, and LangChain. I’ve built AI-driven applications, including a multi-agent system using LangGraph and a Retrieval-Augmented Generation (RAG) pipeline with Llama and Qdrant.
-                        </p>
-                        <p className="text-sm leading-relaxed mt-4 md:text-lg">
-                            Currently, I’m an AI/ML Developer Intern at Vsure Consultancy Services, working on backend architectures and agent orchestration. Previously, I was a Data Engineer Intern at Blank Analytica, optimizing data pipelines and automation workflows.
-                        </p>
+
+                        <div className="mt-6">
+                            <h3 className="text-md font-semibold mb-2">Achievements</h3>
+                            <ul className="list-disc pl-5 text-sm md:text-base space-y-1">
+                                <li>Winner, Google GenAI Hackathon 2024</li>
+                                <li>Runner-up, Bhashini Sprint 2024 (competed against top startups)</li>
+                                <li>Top 5 finalist in 4+ national-level hackathons, including HackCelestial and HackOverflow</li>
+                            </ul>
+                        </div>
+
+                        <div className="mt-6">
+                            <h3 className="text-md font-semibold mb-2">Technical Skills</h3>
+                            <p className="text-sm md:text-base"><span className="font-medium">Languages:</span> Python, Golang, C++, JavaScript, SQL</p>
+                            <p className="text-sm md:text-base"><span className="font-medium">Frameworks/Libraries:</span> FastAPI, LangGraph, PyTorch, React.js, Express.js, NumPy</p>
+                            <p className="text-sm md:text-base"><span className="font-medium">Databases:</span> MongoDB, MySQL, Firebase</p>
+                            <p className="text-sm md:text-base"><span className="font-medium">Cloud/DevOps:</span> AWS EC2, S3, Route 53</p>
+                        </div>
+
+                        <div className="mt-6">
+                            <h3 className="text-md font-semibold mb-2">Certifications</h3>
+                            <ul className="list-disc pl-5 text-sm md:text-base space-y-1">
+                                <li>IBM Data Science Specialization</li>
+                                <li>Deep Learning Specialization – DeepLearning.AI</li>
+                            </ul>
+                        </div>
                     </div>
                 </section>
 
