@@ -140,7 +140,7 @@ export default function Port() {
                         <div className="flex flex-col items-center justify-center gap-4">
                             <div className="flex justify-center items-center space-x-3 md:space-x-4">
                                 <a
-                                    href="https://www.linkedin.com/in/sahil-sasane/"
+                                    href="https://www.linkedin.com/in/sahilsasane/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="bg-black p-3 md:p-4 rounded-2xl flex h-12 md:h-16 hover:text-gray-400 duration-500 transform transition-transform cursor-pointer z-10 text-white"
@@ -331,8 +331,8 @@ export default function Port() {
                                 </div>
                                 <div className="flex items-center">
                                     <Linkedin className="h-5 w-5 mr-3" />
-                                    <a href="https://www.linkedin.com/in/sahil-sasane/" target="_blank">
-                                        <span>linkedin.com/in/sahil-sasane</span>
+                                    <a href="https://www.linkedin.com/in/sahilsasane/" target="_blank">
+                                        <span>linkedin.com/in/sahilsasane</span>
                                     </a>
                                 </div>
                             </div>
