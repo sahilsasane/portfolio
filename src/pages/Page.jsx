@@ -183,19 +183,19 @@ export default function Port() {
                         <ExperienceCard
                             title="GenAI App Developer Intern"
                             company="The Modern Data Company"
-                            period="May 2025 - Present"
+                            period="May 2025 - Sept 2025"
                             description=""
                         />
                         <ExperienceCard
                             title="AI/ML Developer Intern"
                             company="Vsure Consultancy Services"
-                            period="Dec 2024 – May 2025"
+                            period="Dec 2024 - May 2025"
                             description=""
                         />
                         <ExperienceCard
                             title="Data Engineer Intern"
                             company="Blank Analytica"
-                            period="Oct 2024 – Dec 2024"
+                            period="Oct 2024 - Dec 2024"
                             description=""
                         />
 
