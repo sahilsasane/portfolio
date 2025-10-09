@@ -181,6 +181,12 @@ export default function Port() {
                     <h2 className="text-xl font-bold mb-5 border-b border-gray-900 pb-4">Experience</h2>
                     <div className="grid grid-cols-1 md:grid-cols-1">
                         <ExperienceCard
+                            title="Associate AI Engineer"
+                            company="The Modern Data Company"
+                            period="Oct 2025 - Present"
+                            description=""
+                        />
+                        <ExperienceCard
                             title="GenAI App Developer Intern"
                             company="The Modern Data Company"
                             period="May 2025 - Sept 2025"
