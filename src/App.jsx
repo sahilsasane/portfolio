@@ -5,7 +5,7 @@ import Port from './pages/Page';
 function App() {
 
   return (
-    <div className="bg-black flex justify-center" >
+    <div className="flex justify-center" >
       <Port />
     </div>
   )

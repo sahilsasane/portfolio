@@ -1,419 +1,562 @@
-import { Github, Mail, Linkedin, Menu, X } from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Github,
+  Mail,
+  Linkedin,
+  FileText,
+  ArrowUpRight,
+  Moon,
+  Sun,
+} from "lucide-react";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
+function TwitterBird({ size = 18 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+    </svg>
+  );
+}
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.09 } },
+};
 
 export default function Port() {
-    const [scrolled, setScrolled] = useState(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [windowWidth, setWindowWidth] = useState(0);
-    const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return localStorage.getItem("theme") !== "light";
+  });
 
-    useEffect(() => {
-        setIsMounted(true);
-        setWindowWidth(window.innerWidth);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-        };
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDark]);
 
-        const handleScroll = () => {
-            const isScrolled = window.scrollY > 10;
-            if (isScrolled !== scrolled) {
-                setScrolled(isScrolled);
-            }
-        };
+  return (
+    <div className="min-h-screen bg-[var(--c-bg)] text-[var(--c-text-hi)] transition-colors duration-300">
+      {/* Theme toggle */}
+      <motion.button
+        onClick={() => setIsDark((d) => !d)}
+        className="fixed top-5 right-5 z-50 text-[var(--c-text-3)] hover:text-[var(--c-text-hi)] transition-colors"
+        whileTap={{ scale: 0.85 }}
+        whileHover={{ scale: 1.1 }}
+        aria-label="Toggle theme"
+      >
+        <motion.div
+          animate={{ rotate: isDark ? 0 : 180 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+        >
+          {isDark ? <Moon size={18} /> : <Sun size={18} />}
+        </motion.div>
+      </motion.button>
 
-        window.addEventListener('resize', handleResize);
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [scrolled]);
-
-    const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
-
-    const closeMenu = () => setMobileMenuOpen(false);
-
-    const handleHomeClick = (e) => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        window.history.pushState('', document.title, window.location.pathname);
-        closeMenu();
-    };
-
-    return (
-        <div className="min-h-screen bg-black text-white">
-            {/* Header */}
-            <header className={`sticky top-0 z-50 w-full bg-black pt-6 pb-4 md:py-6 px-4 flex justify-between items-center ${scrolled ? 'border-gray-800' : 'border-transparent'} transition-all duration-300`}>
-                <div className="max-w-5xl mx-auto w-full flex justify-between items-center">
-                    <h1 className="text-xl md:text-2xl">Sahil Sasane</h1>
-                    {/* Desktop Navigation */}
-                    <nav className="hidden md:block">
-                        <ul className="flex space-x-6">
-                            <li>
-                                <a href="#" className="hover:text-gray-300 transition-colors" onClick={(e) => {
-                                    e.preventDefault();
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                }}>
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#experience" className="hover:text-gray-300 transition-colors">
-                                    Experience
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#about" className="hover:text-gray-300 transition-colors">
-                                    About
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#projects" className="hover:text-gray-300 transition-colors">
-                                    Projects
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#contact" className="hover:text-gray-300 transition-colors">
-                                    Contact
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-
-                    {/* Mobile Menu Button */}
-                    <button
-                        className="md:hidden text-white focus:outline-none transition-transform duration-300 ease-in-out"
-                        onClick={toggleMenu}
-                    >
-                        {mobileMenuOpen ? <X size={24} className="rotate-90 transition-transform duration-300" /> : <Menu size={24} />}
-                    </button>
-                </div>
-            </header>
-
-            {/* Mobile Navigation Menu */}
-            <div
-                className={`fixed inset-0 bg-black z-40 transform transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
-                    } md:hidden`}
+      {/* Left-side vertical nav — socials */}
+      {isMounted && (
+        <motion.nav
+          className="fixed left-0 top-0 h-screen flex-col items-start justify-center gap-7 pl-8 z-50 hidden md:flex"
+          initial={{ opacity: 0, x: -16 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          {[
+            {
+              href: "mailto:shsasane22@gmail.com",
+              icon: <Mail size={22} />,
+              label: "Email",
+              dim: false,
+            },
+            {
+              href: "https://www.linkedin.com/in/sahilsasane/",
+              icon: <Linkedin size={22} />,
+              label: "LinkedIn",
+              dim: false,
+              external: true,
+            },
+            {
+              href: "https://github.com/sahilsasane",
+              icon: <Github size={22} />,
+              label: "GitHub",
+              dim: false,
+              external: true,
+            },
+            {
+              href: "https://twitter.com/sahilsasane",
+              icon: <TwitterBird size={22} />,
+              label: "Twitter",
+              dim: false,
+              external: true,
+            },
+            {
+              href: "https://drive.google.com/file/d/1P2ZNiCE8M3cCQLZdK7bMFkfDCBBBnw9H/view?usp=sharing",
+              icon: <FileText size={22} />,
+              label: "Resume",
+              dim: true,
+              external: true,
+            },
+          ].map(({ href, icon, label, dim, external }, i) => (
+            <motion.a
+              key={label}
+              href={href}
+              {...(external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              className={`group flex items-center gap-3 transition-colors ${dim
+                ? "text-[var(--c-text-2)] hover:text-[var(--c-text-hi)]"
+                : "text-[var(--c-text-4)] hover:text-[var(--c-text-1)]"
+                }`}
+              initial={{ opacity: 0, x: -12 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: i * 0.07, ease: "easeOut" }}
+              whileHover={{ scale: 1.18, x: 4 }}
+              whileTap={{ scale: 0.9 }}
             >
-                <div className="pt-20 px-4 flex flex-col">
-                    <ul className="flex flex-col space-y-6 items-center text-lg">
-                        <li className={`transform transition-all duration-300 ${mobileMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'
-                            }`} style={{ transitionDelay: '0ms' }}>
-                            <a
-                                href="#"
-                                className="hover:text-gray-300 transition-colors"
-                                onClick={handleHomeClick}
-                            >
-                                Home
-                            </a>
-                        </li>
-                        {['Experience', 'About', 'Projects', 'Contact'].map((item, index) => (
-                            <li
-                                key={item}
-                                className={`transform transition-all duration-300 ${mobileMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'
-                                    }`}
-                                style={{ transitionDelay: `${(index + 1) * 100}ms` }}
-                            >
-                                <a
-                                    href={`#${item.toLowerCase()}`}
-                                    className="hover:text-gray-300 transition-colors"
-                                    onClick={closeMenu}
-                                >
-                                    {item}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
+              {icon}
+              <motion.span
+                className="text-xs whitespace-nowrap text-[var(--c-text-3)]"
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                transition={{ duration: 0.15 }}
+              >
+                {label}
+              </motion.span>
+            </motion.a>
+          ))}
+        </motion.nav>
+      )}
 
-            <main className="max-w-5xl mx-auto px-4 md:px-8">
-                {/* Intro Section */}
-                <section id="intro" className="py-16 md:py-20 flex flex-col items-center justify-center h-screen">
-                    <div className="text-center">
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl mb-4 md:mb-6">Sahil Sasane</h1>
-                        <h2 className="text-xl sm:text-2xl md:text-2xl text-gray-100 mb-6 md:mb-8">Full Stack AI/ML Developer</h2>
-                        <div className="flex flex-col items-center justify-center gap-4">
-                            <div className="flex justify-center items-center space-x-3 md:space-x-4">
-                                <a
-                                    href="https://www.linkedin.com/in/sahilsasane/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="bg-black p-3 md:p-4 rounded-2xl flex h-12 md:h-16 hover:text-gray-400 duration-500 transform transition-transform cursor-pointer z-10 text-white"
-                                >
-                                    {isMounted && "linkedin"}
-                                </a>
-                                <a
-                                    href="https://github.com/sahilsasane"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="bg-black p-3 md:p-4 rounded-2xl flex h-12 md:h-16 hover:text-gray-400 duration-500 transform transition-transform cursor-pointer z-10 text-white"
-                                >
-                                    {isMounted && "github"}
-                                </a>
-                                <a
-                                    href="https://twitter.com"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="bg-black p-3 md:p-4 rounded-2xl flex h-12 md:h-16 hover:text-gray-400 duration-500 transform transition-transform cursor-pointer z-10 text-white"
-                                >
-                                    {isMounted && "twitter"}
-                                </a>
-                                <a
-                                    href="https://drive.google.com/file/d/1P2ZNiCE8M3cCQLZdK7bMFkfDCBBBnw9H/view?usp=sharing"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="bg-black p-3 md:p-4 rounded-2xl flex h-12 md:h-16 hover:text-gray-400 duration-500 transform transition-transform cursor-pointer z-10 text-white"
-                                >
-                                    resume
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+      {/* Floating mobile bottom nav */}
+      <div className="fixed bottom-5 left-1/2 z-50 w-[calc(100vw-2rem)] max-w-[22rem] -translate-x-1/2 md:hidden">
+        <motion.nav
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
+          className={`grid grid-cols-5 items-center rounded-full bg-[var(--c-bg)]/80 p-2 backdrop-blur-sm backdrop-saturate-150 ${isDark ? "" : "shadow-lg shadow-black/15"}`}
+        >
+          {mobileSocials.map(({ href, icon, label, external }) => (
+            <motion.a
+              key={label}
+              href={href}
+              {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              aria-label={label}
+              title={label}
+              className="flex h-11 w-full items-center justify-center rounded-full text-[var(--c-text-3)] transition-colors hover:bg-[var(--c-bg-badge)]/55 hover:text-[var(--c-text-hi)]"
+              whileTap={{ scale: 0.8 }}
+              whileHover={{ y: -2 }}
+            >
+              {icon}
+            </motion.a>
+          ))}
+        </motion.nav>
+      </div>
 
-                {/* Experience Section */}
-                <section id="experience" className="py-5 scroll-mt-16 md:scroll-mt-20">
-                    <h2 className="text-xl font-bold mb-5 border-b border-gray-900 pb-4">Experience</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-1">
-                        <ExperienceCard
-                            title="Associate AI Engineer"
-                            company="The Modern Data Company"
-                            period="Oct 2025 - Present"
-                            description=""
-                        />
-                        <ExperienceCard
-                            title="GenAI App Developer Intern"
-                            company="The Modern Data Company"
-                            period="May 2025 - Sept 2025"
-                            description=""
-                        />
-                        <ExperienceCard
-                            title="AI/ML Developer Intern"
-                            company="Vsure Consultancy Services"
-                            period="Dec 2024 - May 2025"
-                            description=""
-                        />
-                        <ExperienceCard
-                            title="Data Engineer Intern"
-                            company="Blank Analytica"
-                            period="Oct 2024 - Dec 2024"
-                            description=""
-                        />
+      {/* Scrollable content */}
+      <main className="max-w-4xl mx-auto px-5 sm:px-8 md:pl-20 pb-28 md:pb-0">
+        <HomeSection isDark={isDark} />
+        <ExperienceSection />
+        <ProjectsSection />
 
-                        {/* <ExperienceCard
-                            title="Software Engineer Intern"
-                            company="Tech Startup"
-                            period="2017 - 2018"
-                            description="Developed backend services using Python and Django. Worked on data processing pipelines and implemented RESTful APIs."
-                        /> */}
-                    </div>
-                </section>
+      </main>
+    </div>
+  );
+}
 
-                {/* About Me Section */}
-                <section id="about" className="py-5 scroll-mt-16 md:scroll-mt-20">
-                    <h2 className="text-xl font-bold mb-5 border-b border-gray-900 md:pb-4">About Me</h2>
-                    <div className="bg-black p-8 pt-0 pb-0 rounded-lg">
-                        <p className="text-sm leading-relaxed md:text-base">
-                            I’m Sahil, a Computer Science graduate focused on AI/ML, backend systems, and automation. I build production-grade solutions using multi-agent architectures and scalable data workflows for both research and enterprise use cases.
-                        </p>
+const highlights = [
+  { label: "Winner", value: "Google GenAI Hackathon 2024" },
+  { label: "Runner-up", value: "Bhashini Sprint 2024" },
+  { label: "Top 5", value: "4+ national hackathons" },
+];
 
-                        <div className="mt-6">
-                            <h3 className="text-md font-semibold mb-2">Achievements</h3>
-                            <ul className="list-disc pl-5 text-sm md:text-base space-y-1">
-                                <li>Winner, Google GenAI Hackathon 2024</li>
-                                <li>Runner-up, Bhashini Sprint 2024 (competed against top startups)</li>
-                                <li>Top 5 finalist in 4+ national-level hackathons, including HackCelestial and HackOverflow</li>
-                            </ul>
-                        </div>
+const mobileSocials = [
+  {
+    href: "mailto:shsasane22@gmail.com",
+    icon: <Mail size={18} />,
+    label: "Email",
+  },
+  {
+    href: "https://www.linkedin.com/in/sahilsasane/",
+    icon: <Linkedin size={18} />,
+    label: "LinkedIn",
+    external: true,
+  },
+  {
+    href: "https://github.com/sahilsasane",
+    icon: <Github size={18} />,
+    label: "GitHub",
+    external: true,
+  },
+  {
+    href: "https://twitter.com/sahilsasane",
+    icon: <TwitterBird size={18} />,
+    label: "Twitter",
+    external: true,
+  },
+  {
+    href: "https://drive.google.com/file/d/1P2ZNiCE8M3cCQLZdK7bMFkfDCBBBnw9H/view?usp=sharing",
+    icon: <FileText size={18} />,
+    label: "Resume",
+    external: true,
+  },
+];
 
-                        <div className="mt-6">
-                            <h3 className="text-md font-semibold mb-2">Technical Skills</h3>
-                            <p className="text-sm md:text-base"><span className="font-medium">Languages:</span> Python, Golang, C++, JavaScript, SQL</p>
-                            <p className="text-sm md:text-base"><span className="font-medium">Frameworks/Libraries:</span> FastAPI, LangGraph, PyTorch, React.js, Express.js, NumPy</p>
-                            <p className="text-sm md:text-base"><span className="font-medium">Databases:</span> MongoDB, MySQL, Firebase</p>
-                            <p className="text-sm md:text-base"><span className="font-medium">Cloud/DevOps:</span> AWS EC2, S3, Route 53</p>
-                        </div>
-
-                        <div className="mt-6">
-                            <h3 className="text-md font-semibold mb-2">Certifications</h3>
-                            <ul className="list-disc pl-5 text-sm md:text-base space-y-1">
-                                <li>IBM Data Science Specialization</li>
-                                <li>Deep Learning Specialization – DeepLearning.AI</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-
-                {/* Projects Section */}
-                <section id="projects" className="py-5 scroll-mt-16 md:scroll-mt-20">
-                    <h2 className="text-xl font-bold mb-5 border-b border-gray-900 pb-4">Projects</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 ">
-                        <ProjectCard
-                            title="Vayu - Google GenAI Hackathon"
-                            description="A mental health app for GenZ, built with Flutter and Express."
-                            tags={["/tech/express.svg", "/tech/flutter.svg", "/tech/gemini.svg", "/tech/mongo.svg"]}
-                            image="/vayu.png"
-                            projectLink="https://vayu-one.vercel.app/"
-                        />
-                        <ProjectCard
-                            title="Cautious Memory"
-                            description="Go-based API with clean architecture, security, and scalability."
-                            tags={["/tech/go_black.svg", "/tech/postgresql.svg"]}
-                            image="/golang-large.png"
-                            projectLink="https://github.com/sahilsasane/cautious-memory"
-                        />
-                        <ProjectCard
-                            title="Pneumonia GAN"
-                            description="GAN for realistic image generation and binary classification."
-                            tags={["/tech/python.svg", "/tech/pytorch.svg"]}
-                            image="/major.png"
-                            projectLink="https://github.com/sahilsasane/GAN-major"
-                        />
-                        <ProjectCard
-                            title="Link"
-                            description="Job and Internship Portal for students."
-                            tags={["/tech/express.svg", "/tech/react.svg", "/tech/mongo.svg"]}
-                            image="/hackcelestial.png"
-                            projectLink="https://hackcelestial.vercel.app/"
-                        />
-                        <ProjectCard
-                            title="VyavaSahayak - Bhashini Sprint"
-                            description="Platform for ecommerce presence management."
-                            tags={["/tech/express.svg", "/tech/gemini.svg", "/tech/mongo.svg"]}
-                            image="/bhashini.jpg"
-                            projectLink="https://github.com/nishaaannnt/q-star-bhashini"
-                        />
-                        <ProjectCard
-                            title="Micrograd"
-                            description="Backpropagation implementation from scratch"
-                            tags={["/tech/python.svg"]}
-                            image="/micrograd.png"
-                            projectLink="https://github.com/sahilsasane/micrograd"
-                        />
-                        <ProjectCard
-                            title="LLM-Based AI Agent"
-                            description="Analyzes CSV/Excel statistics via natural language queries."
-                            tags={["/tech/python.svg", "/tech/langchain.svg", "/tech/fastapi.svg"]}
-                            image="/rag.png"
-                            projectLink="https://github.com/sahilsasane/llm-yolo/tree/main/Part%201"
-                        />
-                        <ProjectCard
-                            title="Lost & Found"
-                            description="Help guardians find their lost children using facial recognition."
-                            tags={["/tech/python.svg", "/tech/flask.svg", "/tech/mysql.svg"]}
-                            image="/lost_and_found.png"
-                            projectLink="https://github.com/sahilsasane/Lost-Found"
-                        />
-                    </div>
-                </section>
-
-                {/* Contact Section */}
-                <section id="contact" className="py-5 scroll-mt-16 md:scroll-mt-20">
-                    <h2 className="text-xl font-bold mb-5 border-b border-gray-900 pb-4">Contact</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                        <div>
-                            <h3 className="text-md md:text-md font-semibold mb-1">Get In Touch</h3>
-                            <p className="text-gray-400 mb-6">
-                                Feel free to reach out if you're looking for a developer, have a question, or just want to connect.
-                            </p>
-                            <div className="space-y-4">
-                                <div className="flex items-center">
-                                    <Mail className="h-5 w-5 mr-3" />
-                                    <a href="">
-                                        <span>shsasane22@gmail.com</span>
-                                    </a>
-                                </div>
-                                <div className="flex items-center">
-                                    <Github className="h-5 w-5 mr-3" />
-                                    <a href="https://github.com/sahilsasane" target="_blank">
-                                        <span>github.com/sahilsasane</span>
-                                    </a>
-                                </div>
-                                <div className="flex items-center">
-                                    <Linkedin className="h-5 w-5 mr-3" />
-                                    <a href="https://www.linkedin.com/in/sahilsasane/" target="_blank">
-                                        <span>linkedin.com/in/sahilsasane</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </main>
-
-            {/* Footer */}
-            <footer className="bg-black py-8">
-                <div className="max-w-5xl mx-auto px-4 text-center">
-                    <p className="text-sm md:text-lg">© {new Date().getFullYear()} Sahil. All rights reserved.</p>
-                </div>
-            </footer>
+function HomeSection({ isDark }) {
+  return (
+    <div className="w-full pt-12 sm:pt-16 pb-10">
+      {/* Cover + profile photo */}
+      <motion.div
+        className="relative w-full"
+        initial={{ opacity: 0, scale: 0.97 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.65, ease: "easeOut" }}
+      >
+        <div className="w-full h-40 sm:h-52 md:h-64 rounded-2xl overflow-hidden relative bg-[var(--c-bg)]">
+          {/* Dark cover */}
+          <motion.img
+            src="/cover.JPG"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover object-[50%_38%] sm:object-[50%_30%] scale-100"
+            animate={{ opacity: isDark ? 1 : 0 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+          />
+          {/* Light cover */}
+          <motion.img
+            src="/cover-white.JPG"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover object-[50%_38%] sm:object-[50%_30%] scale-100"
+            animate={{ opacity: isDark ? 0 : 1 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+          />
+          {/* Gradient overlays — always on top */}
+          <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-[var(--c-bg)] to-transparent" />
+          <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[var(--c-bg)] to-transparent" />
+          <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-[var(--c-bg)] to-transparent" />
         </div>
-    )
+        <motion.div
+          className="absolute bottom-0 left-5 translate-y-1/2 w-[68px] h-[68px] sm:w-[76px] sm:h-[76px] rounded-full overflow-hidden border-4 border-[var(--c-profile-border)]"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
+        >
+          <img
+            src="/sahil.JPG"
+            alt="Sahil Sasane"
+            className="w-full h-full object-cover"
+          />
+        </motion.div>
+      </motion.div>
+
+      {/* Everything below staggered in */}
+      <motion.div variants={stagger} initial="hidden" animate="visible">
+        {/* Name + role */}
+        <motion.div variants={fadeUp} className="mt-12">
+          <h1 className="text-3xl sm:text-4xl font-normal mb-1 text-[var(--c-text-hi)]">
+            sahil sasane
+          </h1>
+          <p className="text-sm sm:text-base text-[var(--c-text-2)] mt-1">
+            ai engineer
+          </p>
+        </motion.div>
+
+        {/* Currently badge */}
+        <motion.div variants={fadeUp} className="mt-4">
+          <span className="inline-flex items-center gap-2 text-xs text-[var(--c-text-2)] bg-[var(--c-bg-badge)] border border-[var(--c-border)] px-3 py-1.5 rounded-full">
+            <motion.span
+              className="w-1.5 h-1.5 rounded-full bg-green-600 shrink-0"
+              animate={{ opacity: [1, 0.3, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+            Currently — ai engineer @ the modern data company
+          </span>
+        </motion.div>
+
+        {/* Bio */}
+        <motion.div variants={fadeUp} className="mt-8 space-y-3">
+          <p className="text-base text-[var(--c-text-1)] leading-relaxed">
+            I build AI that doesn't just demo well.
+          </p>
+          <p className="text-sm text-[var(--c-text-2)] leading-relaxed">
+            Drawn to the gap between what ML research promises and what actually
+            runs in production — multi-agent systems, production pipelines,
+            backends that hold.
+          </p>
+        </motion.div>
+
+        {/* Highlights */}
+        <motion.div
+          variants={fadeUp}
+          className="mt-8 border-t border-[var(--c-border-sub)] pt-6 space-y-3"
+        >
+          {highlights.map(({ label, value }) => (
+            <div key={label} className="flex gap-4 sm:gap-6">
+              <span className="text-xs text-[var(--c-text-3)] w-20 sm:w-24 shrink-0 pt-0.5">
+                {label}
+              </span>
+              <span className="text-sm text-[var(--c-text-1)]">{value}</span>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          variants={fadeUp}
+          className="mt-8 border-t border-[var(--c-border-sub)] pt-6"
+        >
+          <p className="text-sm text-[var(--c-text-3)]">
+            Open to the right roles, collabs, and hard problems.
+          </p>
+          <motion.a
+            href="mailto:shsasane22@gmail.com"
+            className="mt-1 inline-block text-sm text-[var(--c-text-2)] hover:text-[var(--c-text-hi)] transition-colors"
+            whileHover={{ x: 3 }}
+            transition={{ duration: 0.15 }}
+          >
+            shsasane22@gmail.com
+          </motion.a>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
 }
 
-function ExperienceCard({
-    title,
-    company,
-    period,
-    description,
-}) {
-    const descriptionPoints = description.split('*').filter(point => point.trim());
-    return (
-        <Card className="bg-black border-black text-white">
-            <CardHeader>
-                <CardTitle>{title}</CardTitle>
-                <CardDescription>
-                    {company}
-                    <div className="">{period}</div>
-                </CardDescription>
-            </CardHeader>
-            <CardContent>
-                <ul className="list-disc pl-5 space-y-1">
-                    {descriptionPoints.map((point, index) => (
-                        <li className="text-sm md:text-lg" key={index}>{point.replace(/^◦\s*/, '')}</li>
-                    ))}
-                </ul>
-            </CardContent>
-        </Card>
-    )
+function ExperienceSection() {
+  const experiences = [
+    {
+      company: "The Modern Data Company",
+      type: "Modern Data Platform",
+      roles: [
+        {
+          title: "Associate AI Engineer",
+          period: "2025 – Present",
+          description:
+            "Designing and deploying multi-agent LLM systems for enterprise data automation. Building scalable pipelines that connect unstructured data to actionable insights.",
+        },
+        {
+          title: "GenAI App Developer Intern",
+          period: "2025",
+          description:
+            "Built GenAI applications integrating large language models with internal data pipelines and REST APIs. Shipped features used in production.",
+        },
+      ],
+    },
+    {
+      company: "Vsure Consultancy Services",
+      type: "IT Consultancy",
+      roles: [
+        {
+          title: "AI/ML Developer Intern",
+          period: "2024 – 2025",
+          description:
+            "Developed ML models and computer vision pipelines for identity verification. Automated document processing workflows end-to-end.",
+        },
+      ],
+    },
+    {
+      company: "Blank Analytica",
+      type: "Analytics Startup",
+      roles: [
+        {
+          title: "Data Engineer Intern",
+          period: "2024",
+          description:
+            "Engineered ETL pipelines and analytics infrastructure using Python and cloud tooling. Improved data reliability and reduced processing time.",
+        },
+      ],
+    },
+  ];
+
+  return (
+    <div className="w-full pb-10">
+      <motion.h2
+        className="text-2xl font-light text-[var(--c-text-2)] mb-10"
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+        Experience
+      </motion.h2>
+      <div className="border-t border-[var(--c-border)]">
+        {experiences.map((exp, i) => (
+          <motion.div
+            key={i}
+            className="py-8 border-b border-[var(--c-border-sub)]"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
+          >
+            <div className="flex items-baseline gap-3 mb-5">
+              <span className="text-base sm:text-lg text-[var(--c-text-hi)]">
+                {exp.company}
+              </span>
+              <span className="text-xs text-[var(--c-text-4)] hidden sm:inline">
+                {exp.type}
+              </span>
+            </div>
+            <div className="space-y-0">
+              {exp.roles.map((role, j) => (
+                <div key={j}>
+                  {j > 0 && (
+                    <div className="border-t border-[var(--c-border-sub)] my-5" />
+                  )}
+                  <div className="flex-1">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2 gap-0.5 sm:gap-0">
+                      <span className="text-sm text-[var(--c-text-1)]">
+                        {role.title}
+                      </span>
+                      <span className="text-xs sm:text-sm text-[var(--c-text-4)] sm:ml-4 shrink-0">
+                        {role.period}
+                      </span>
+                    </div>
+                    <p className="text-sm text-[var(--c-text-3)] leading-relaxed">
+                      {role.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
-function ProjectCard({
-    title,
-    description,
-    tags,
-    image,
-    projectLink
-}) {
-    return (
-        <a href={projectLink} target="_blank" rel="noopener noreferrer" className="block no-underline w-full">
-            <Card className="bg-black border-gray-950 overflow-hidden text-white flex flex-row h-40 hover:border-gray-900 transition-colors rounded-md" >
-                {/* Image on the left */}
-                <div className="w-32 md:w-48 relative">
-                    <img src={image || "/placeholder.svg"} alt={title} className="h-full w-full object-cover" />
-                </div>
+function ProjectsSection() {
+  const projects = [
+    {
+      title: "Vayu",
+      description:
+        "Mental health app for GenZ. Winner, Google GenAI Hackathon 2024.",
+      tech: ["Flutter", "Gemini", "MongoDB"],
+      link: "https://vayu-one.vercel.app/",
+    },
+    {
+      title: "Cautious Memory",
+      description: "Go API with clean architecture, JWT auth, and PostgreSQL.",
+      tech: ["Go", "PostgreSQL"],
+      link: "https://github.com/sahilsasane/cautious-memory",
+    },
+    {
+      title: "Pneumonia GAN",
+      description:
+        "GAN for medical imaging — synthetic data generation and binary classification.",
+      tech: ["Python", "PyTorch"],
+      link: "https://github.com/sahilsasane/GAN-major",
+    },
+    {
+      title: "Link",
+      description: "Job and internship portal for students.",
+      tech: ["Express", "React", "MongoDB"],
+      link: "https://hackcelestial.vercel.app/",
+    },
+    {
+      title: "VyavaSahayak",
+      description:
+        "E-commerce platform for vernacular markets. Runner-up, Bhashini Sprint 2024.",
+      tech: ["Express", "Gemini", "MongoDB"],
+      link: "https://github.com/nishaaannnt/q-star-bhashini",
+    },
+    {
+      title: "LLM-Based AI Agent",
+      description:
+        "Natural language queries over CSV/Excel via LangChain and FastAPI.",
+      tech: ["Python", "LangChain", "FastAPI"],
+      link: "https://github.com/sahilsasane/llm-yolo/tree/main/Part%201",
+    },
+    {
+      title: "Micrograd",
+      description: "Backpropagation engine built from scratch in Python.",
+      tech: ["Python"],
+      link: "https://github.com/sahilsasane/micrograd",
+    },
+    {
+      title: "Lost & Found",
+      description:
+        "Facial recognition app to help guardians find lost children.",
+      tech: ["Python", "Flask", "MySQL"],
+      link: "https://github.com/sahilsasane/Lost-Found",
+    },
+  ];
 
-                {/* Content in the middle */}
-                <div className="flex flex-col flex-1 p-4">
-                    <h3 className="text-sm md:text-lg font-bold mb-2">{title}</h3>
-                    <p className="text-sm flex-1">{description}</p>
-                </div>
-
-                {/* Tags in vertical arrangement on the right */}
-                <div className="flex flex-col justify-center items-center p-4 gap-2 border-l border-gray-950">
-                    {tags.map((tag, index) => (
-                        <span key={index} className="px-2 py-1 bg-white rounded-md">
-                            <img width={20} height={20} src={tag} alt="" />
-                        </span>
-                    ))}
-                </div>
-            </Card>
-        </a>
-    )
+  return (
+    <div className="w-full pb-6">
+      <motion.h2
+        className="text-2xl font-light text-[var(--c-text-2)] mb-10"
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+        Projects
+      </motion.h2>
+      <div className="border-t border-[var(--c-border)]">
+        {projects.map((p, i) => (
+          <motion.a
+            key={i}
+            href={p.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center justify-between py-5 border-b border-[var(--c-border-sub)] hover:border-[var(--c-border)] transition-colors"
+            initial={{ opacity: 0, x: -12 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-30px" }}
+            transition={{ duration: 0.4, delay: i * 0.05, ease: "easeOut" }}
+            whileHover={{ x: 4 }}
+          >
+            <div className="flex-1 min-w-0 pr-4 sm:pr-8">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-base text-[var(--c-text-hi)] group-hover:text-[var(--c-text-hi)] transition-colors">
+                  {p.title}
+                </span>
+                <motion.span
+                  className="text-[var(--c-text-4)] group-hover:text-[var(--c-text-2)] transition-colors shrink-0"
+                  whileHover={{ rotate: 45, scale: 1.1 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ArrowUpRight size={13} />
+                </motion.span>
+              </div>
+              <p className="text-sm text-[var(--c-text-3)] leading-relaxed">
+                {p.description}
+              </p>
+            </div>
+            <div className="hidden sm:flex gap-2 shrink-0">
+              {p.tech.map((t, j) => (
+                <span
+                  key={j}
+                  className="text-xs px-2.5 py-1 border border-[var(--c-border)] rounded-full text-[var(--c-text-3)] whitespace-nowrap"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+            {/* Mobile: first tag only */}
+            <div className="flex sm:hidden shrink-0">
+              <span className="text-xs px-2 py-1 border border-[var(--c-border)] rounded-full text-[var(--c-text-4)] whitespace-nowrap">
+                {p.tech[0]}
+              </span>
+            </div>
+          </motion.a>
+        ))}
+      </div>
+    </div>
+  );
 }

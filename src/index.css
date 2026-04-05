@@ -7,16 +7,51 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --radius: 0.5rem;
+  /* Light mode */
+  --c-bg:             #ffffff;
+  --c-bg-badge:       #f4f4f5;
+  --c-border:         #e4e4e7;
+  --c-border-sub:     #f4f4f5;
+  --c-text-hi:        #18181b;
+  --c-text-1:         #3f3f46;
+  --c-text-2:         #71717a;
+  --c-text-3:         #a1a1aa;
+  --c-text-4:         #d4d4d8;
+  --c-profile-border: #ffffff;
+  --c-scrollbar:      #d4d4d8;
+  --c-scrollbar-hover:#a1a1aa;
+}
+
+.dark {
+  --c-bg:             #000000;
+  --c-bg-badge:       #09090b;
+  --c-border:         #27272a;
+  --c-border-sub:     #18181b;
+  --c-text-hi:        #ffffff;
+  --c-text-1:         #a1a1aa;
+  --c-text-2:         #71717a;
+  --c-text-3:         #52525b;
+  --c-text-4:         #3f3f46;
+  --c-profile-border: #000000;
+  --c-scrollbar:      #242424;
+  --c-scrollbar-hover:#3b3b3b;
+}
+
 html {
     font-family: 'Noto Serif','Arial';
     scroll-behavior: smooth;
+    background-color: var(--c-bg);
+    transition: background-color 0.3s ease;
 }
 
-@layer base {
-  :root {
-        --radius: 0.5rem;
-    }
+body {
+    background-color: var(--c-bg);
+    font-family: 'Montserrat','JetBrains Mono', monospace;
+    transition: background-color 0.3s ease;
 }
+
 ::-webkit-scrollbar {
     width: 0px;
   }
@@ -24,14 +59,11 @@ html {
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: #242424;
+    background-color: var(--c-scrollbar);
     border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #3b3b3b;
+    background: var(--c-scrollbar-hover);
   }
 
 
-  body {
-    font-family: 'Montserrat','JetBrains Mono', monospace;
-  }
