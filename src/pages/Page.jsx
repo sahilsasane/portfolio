@@ -83,34 +83,34 @@ export default function Port() {
           {[
             {
               href: "mailto:shsasane22@gmail.com",
-              icon: <Mail size={22} />,
+              icon: <Mail size={24} />,
               label: "Email",
               dim: false,
             },
             {
               href: "https://www.linkedin.com/in/sahilsasane/",
-              icon: <Linkedin size={22} />,
+              icon: <Linkedin size={24} />,
               label: "LinkedIn",
               dim: false,
               external: true,
             },
             {
               href: "https://github.com/sahilsasane",
-              icon: <Github size={22} />,
+              icon: <Github size={24} />,
               label: "GitHub",
               dim: false,
               external: true,
             },
             {
               href: "https://twitter.com/schiz0sane",
-              icon: <TwitterBird size={22} />,
+              icon: <TwitterBird size={24} />,
               label: "Twitter",
               dim: false,
               external: true,
             },
             {
               href: "https://drive.google.com/file/d/1P2ZNiCE8M3cCQLZdK7bMFkfDCBBBnw9H/view?usp=sharing",
-              icon: <FileText size={22} />,
+              icon: <FileText size={24} />,
               label: "Resume",
               dim: true,
               external: true,
@@ -119,14 +119,17 @@ export default function Port() {
             <motion.a
               key={label}
               href={href}
-              onClick={() => posthog.capture("social_link_clicked", { label, href })}
+              onClick={() =>
+                posthog.capture("social_link_clicked", { label, href })
+              }
               {...(external
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}
-              className={`group flex items-center gap-3 transition-colors ${dim
-                ? "text-[var(--c-text-2)] hover:text-[var(--c-text-hi)]"
-                : "text-[var(--c-text-4)] hover:text-[var(--c-text-1)]"
-                }`}
+              className={`group flex items-center gap-3 transition-colors ${
+                dim
+                  ? "text-[var(--c-text-2)] hover:text-[var(--c-text-hi)]"
+                  : "text-[var(--c-text-4)] hover:text-[var(--c-text-1)]"
+              }`}
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, delay: i * 0.07, ease: "easeOut" }}
@@ -159,8 +162,12 @@ export default function Port() {
             <motion.a
               key={label}
               href={href}
-              onClick={() => posthog.capture("social_link_clicked", { label, href })}
-              {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              onClick={() =>
+                posthog.capture("social_link_clicked", { label, href })
+              }
+              {...(external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
               aria-label={label}
               title={label}
               className="flex h-11 w-full items-center justify-center rounded-full text-[var(--c-text-3)] transition-colors hover:bg-[var(--c-bg-badge)]/55 hover:text-[var(--c-text-hi)]"
@@ -178,7 +185,6 @@ export default function Port() {
         <HomeSection isDark={isDark} />
         <ExperienceSection />
         <ProjectsSection />
-
       </main>
     </div>
   );
@@ -193,30 +199,30 @@ const highlights = [
 const mobileSocials = [
   {
     href: "mailto:shsasane22@gmail.com",
-    icon: <Mail size={18} />,
+    icon: <Mail size={22} />,
     label: "Email",
   },
   {
     href: "https://www.linkedin.com/in/sahilsasane/",
-    icon: <Linkedin size={18} />,
+    icon: <Linkedin size={22} />,
     label: "LinkedIn",
     external: true,
   },
   {
     href: "https://github.com/sahilsasane",
-    icon: <Github size={18} />,
+    icon: <Github size={22} />,
     label: "GitHub",
     external: true,
   },
   {
     href: "https://twitter.com/sahilsasane",
-    icon: <TwitterBird size={18} />,
+    icon: <TwitterBird size={22} />,
     label: "Twitter",
     external: true,
   },
   {
     href: "https://drive.google.com/file/d/1P2ZNiCE8M3cCQLZdK7bMFkfDCBBBnw9H/view?usp=sharing",
-    icon: <FileText size={18} />,
+    icon: <FileText size={22} />,
     label: "Resume",
     external: true,
   },
@@ -322,7 +328,7 @@ function HomeSection({ isDark }) {
         >
           {highlights.map(({ label, value }) => (
             <div key={label} className="flex gap-4 sm:gap-6">
-              <span className="text-xs text-[var(--c-text-3)] w-20 sm:w-24 shrink-0 pt-0.5">
+              <span className="text-sm text-[var(--c-text-3)] w-20 sm:w-24 shrink-0">
                 {label}
               </span>
               <span className="text-sm text-[var(--c-text-1)]">{value}</span>
@@ -340,7 +346,9 @@ function HomeSection({ isDark }) {
           </p>
           <motion.a
             href="mailto:shsasane22@gmail.com"
-            onClick={() => posthog.capture("email_clicked", { location: "cta" })}
+            onClick={() =>
+              posthog.capture("email_clicked", { location: "cta" })
+            }
             className="mt-1 inline-block text-sm text-[var(--c-text-2)] hover:text-[var(--c-text-hi)] transition-colors"
             whileHover={{ x: 3 }}
             transition={{ duration: 0.15 }}
@@ -357,16 +365,16 @@ function ExperienceSection() {
   const experiences = [
     {
       company: "The Modern Data Company",
-      type: "Modern Data Platform",
+      type: "Data Platform Startup",
       roles: [
         {
-          title: "Associate AI Engineer",
+          title: "AI Engineer",
           period: "2025 – Present",
           description:
             "Building a multi-agent LLM system (LangGraph) for natural-language querying over enterprise data — schema-aware SQL generation, vector search, and streaming agent pipelines with safety guardrails. Also designed and shipped an OAuth 2.1 authorization broker for secure AI-tool access, later ported from Python to Go.",
         },
         {
-          title: "GenAI App Developer Intern",
+          title: "AI Intern",
           period: "2025",
           description:
             "Built the initial version of a multi-agent conversational data agent integrating LLMs with internal data pipelines and REST APIs — the system that later went to production.",
@@ -374,11 +382,11 @@ function ExperienceSection() {
       ],
     },
     {
-      company: "Vsure Consultancy Services",
-      type: "IT Consultancy",
+      company: "Anvex AI",
+      type: "AI Startup",
       roles: [
         {
-          title: "AI/ML Developer Intern",
+          title: "AI Intern",
           period: "2024 – 2025",
           description:
             "Developed ML models and computer vision pipelines for identity verification. Automated document processing workflows end-to-end.",
@@ -402,7 +410,7 @@ function ExperienceSection() {
   return (
     <div className="w-full pb-10">
       <motion.h2
-        className="text-2xl font-light text-[var(--c-text-2)] mb-10"
+        className="text-2xl font-normal text-[var(--c-text-1)] mb-10"
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
@@ -424,7 +432,7 @@ function ExperienceSection() {
               <span className="text-base sm:text-lg text-[var(--c-text-hi)]">
                 {exp.company}
               </span>
-              <span className="text-xs text-[var(--c-text-4)] hidden sm:inline">
+              <span className="text-sm text-[var(--c-text-4)] hidden sm:inline">
                 {exp.type}
               </span>
             </div>
@@ -439,7 +447,7 @@ function ExperienceSection() {
                       <span className="text-sm text-[var(--c-text-1)]">
                         {role.title}
                       </span>
-                      <span className="text-xs sm:text-sm text-[var(--c-text-4)] sm:ml-4 shrink-0">
+                      <span className="text-sm text-[var(--c-text-4)] sm:ml-4 shrink-0">
                         {role.period}
                       </span>
                     </div>
@@ -506,7 +514,7 @@ function ProjectsSection() {
   return (
     <div className="w-full pb-6">
       <motion.h2
-        className="text-2xl font-light text-[var(--c-text-2)] mb-10"
+        className="text-2xl font-normal text-[var(--c-text-1)] mb-10"
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
@@ -521,7 +529,12 @@ function ProjectsSection() {
             href={p.link}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => posthog.capture("project_clicked", { title: p.title, link: p.link })}
+            onClick={() =>
+              posthog.capture("project_clicked", {
+                title: p.title,
+                link: p.link,
+              })
+            }
             className="group flex items-center justify-between py-5 border-b border-[var(--c-border-sub)] hover:border-[var(--c-border)] transition-colors"
             initial={{ opacity: 0, x: -12 }}
             whileInView={{ opacity: 1, x: 0 }}
