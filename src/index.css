@@ -43,13 +43,19 @@ html {
     font-family: 'Noto Serif','Arial';
     scroll-behavior: smooth;
     background-color: var(--c-bg);
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
     background-color: var(--c-bg);
     font-family: 'Montserrat','JetBrains Mono', monospace;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 ::-webkit-scrollbar {
@@ -65,5 +71,4 @@ body {
   ::-webkit-scrollbar-thumb:hover {
     background: var(--c-scrollbar-hover);
   }
-
 

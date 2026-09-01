@@ -52,7 +52,7 @@ export default function Port() {
   }, [isDark]);
 
   return (
-    <div className="min-h-screen bg-[var(--c-bg)] text-[var(--c-text-hi)] transition-colors duration-300">
+    <div className="min-h-screen w-full bg-[var(--c-bg)] text-[var(--c-text-hi)] transition-colors duration-300">
       {/* Theme toggle */}
       <motion.button
         onClick={() => {
@@ -102,7 +102,7 @@ export default function Port() {
               external: true,
             },
             {
-              href: "https://twitter.com/sahilsasane",
+              href: "https://twitter.com/schiz0sane",
               icon: <TwitterBird size={22} />,
               label: "Twitter",
               dim: false,
@@ -232,27 +232,38 @@ function HomeSection({ isDark }) {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.65, ease: "easeOut" }}
       >
-        <div className="w-full h-40 sm:h-52 md:h-64 rounded-2xl overflow-hidden relative bg-[var(--c-bg)]">
-          {/* Dark cover */}
-          <motion.img
-            src="/cover.JPG"
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover object-[50%_38%] sm:object-[50%_30%] scale-100"
-            animate={{ opacity: isDark ? 1 : 0 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-          />
-          {/* Light cover */}
-          <motion.img
-            src="/cover-white.JPG"
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover object-[50%_38%] sm:object-[50%_30%] scale-100"
-            animate={{ opacity: isDark ? 0 : 1 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-          />
-          {/* Gradient overlays — always on top */}
-          <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-[var(--c-bg)] to-transparent" />
-          <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[var(--c-bg)] to-transparent" />
-          <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-[var(--c-bg)] to-transparent" />
+        <div
+          className="w-full h-40 sm:h-52 md:h-64 relative bg-[var(--c-bg)]"
+          style={{ clipPath: "inset(0 round 1rem)" }}
+        >
+          <div
+            className="absolute inset-0"
+            style={{
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent, black 25%, black 75%, transparent), linear-gradient(to bottom, transparent, black 8%, black 25%, transparent)",
+              WebkitMaskComposite: "source-in",
+              maskImage:
+                "linear-gradient(to right, transparent, black 25%, black 75%, transparent), linear-gradient(to bottom, transparent, black 8%, black 25%, transparent)",
+              maskComposite: "intersect",
+            }}
+          >
+            <motion.img
+              src="/cover.JPG"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover object-[50%_38%] sm:object-[50%_30%]"
+              style={{ mixBlendMode: "screen" }}
+              animate={{ opacity: isDark ? 1 : 0 }}
+              transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            />
+            <motion.img
+              src="/cover-white.JPG"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover object-[50%_38%] sm:object-[50%_30%]"
+              style={{ mixBlendMode: "multiply" }}
+              animate={{ opacity: isDark ? 0 : 1 }}
+              transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            />
+          </div>
         </div>
         <motion.div
           className="absolute bottom-0 left-5 translate-y-1/2 w-[68px] h-[68px] sm:w-[76px] sm:h-[76px] rounded-full overflow-hidden border-4 border-[var(--c-profile-border)]"
@@ -352,13 +363,13 @@ function ExperienceSection() {
           title: "Associate AI Engineer",
           period: "2025 – Present",
           description:
-            "Designing and deploying multi-agent LLM systems for enterprise data automation. Building scalable pipelines that connect unstructured data to actionable insights.",
+            "Building a multi-agent LLM system (LangGraph) for natural-language querying over enterprise data — schema-aware SQL generation, vector search, and streaming agent pipelines with safety guardrails. Also designed and shipped an OAuth 2.1 authorization broker for secure AI-tool access, later ported from Python to Go.",
         },
         {
           title: "GenAI App Developer Intern",
           period: "2025",
           description:
-            "Built GenAI applications integrating large language models with internal data pipelines and REST APIs. Shipped features used in production.",
+            "Built the initial version of a multi-agent conversational data agent integrating LLMs with internal data pipelines and REST APIs — the system that later went to production.",
         },
       ],
     },
@@ -451,55 +462,44 @@ function ProjectsSection() {
     {
       title: "Vayu",
       description:
-        "Mental health app for GenZ. Winner, Google GenAI Hackathon 2024.",
+        "Mental-health app for GenZ built in 36 hours — mood tracking, journaling, and a Gemini-powered companion. Winner, Google GenAI Hackathon 2024.",
       tech: ["Flutter", "Gemini", "MongoDB"],
       link: "https://vayu-one.vercel.app/",
     },
     {
       title: "Cautious Memory",
-      description: "Go API with clean architecture, JWT auth, and PostgreSQL.",
+      description:
+        "REST API in idiomatic Go — clean architecture, JWT auth, and PostgreSQL, structured for testable service layers.",
       tech: ["Go", "PostgreSQL"],
       link: "https://github.com/sahilsasane/cautious-memory",
     },
     {
       title: "Pneumonia GAN",
       description:
-        "GAN for medical imaging — synthetic data generation and binary classification.",
+        "GAN-based synthetic chest X-ray generation to augment a CNN pneumonia classifier under limited medical imaging data.",
       tech: ["Python", "PyTorch"],
       link: "https://github.com/sahilsasane/GAN-major",
     },
     {
-      title: "Link",
-      description: "Job and internship portal for students.",
-      tech: ["Express", "React", "MongoDB"],
-      link: "https://hackcelestial.vercel.app/",
-    },
-    {
       title: "VyavaSahayak",
       description:
-        "E-commerce platform for vernacular markets. Runner-up, Bhashini Sprint 2024.",
+        "E-commerce platform for vernacular markets, with Gemini-powered multilingual product listings. Runner-up, Bhashini Sprint 2024.",
       tech: ["Express", "Gemini", "MongoDB"],
       link: "https://github.com/nishaaannnt/q-star-bhashini",
     },
     {
       title: "LLM-Based AI Agent",
       description:
-        "Natural language queries over CSV/Excel via LangChain and FastAPI.",
+        "Natural-language querying over CSV/Excel — schema inference and pandas code generation via a LangChain agent, served through FastAPI.",
       tech: ["Python", "LangChain", "FastAPI"],
       link: "https://github.com/sahilsasane/llm-yolo/tree/main/Part%201",
     },
     {
       title: "Micrograd",
-      description: "Backpropagation engine built from scratch in Python.",
+      description:
+        "A backprop engine and autograd built from scratch in Python, following Karpathy's micrograd — for understanding what PyTorch does under the hood.",
       tech: ["Python"],
       link: "https://github.com/sahilsasane/micrograd",
-    },
-    {
-      title: "Lost & Found",
-      description:
-        "Facial recognition app to help guardians find lost children.",
-      tech: ["Python", "Flask", "MySQL"],
-      link: "https://github.com/sahilsasane/Lost-Found",
     },
   ];
 
