@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import posthog from "posthog-js";
 
 function TwitterBird({ size = 18 }) {
   return (
@@ -54,7 +55,10 @@ export default function Port() {
     <div className="min-h-screen bg-[var(--c-bg)] text-[var(--c-text-hi)] transition-colors duration-300">
       {/* Theme toggle */}
       <motion.button
-        onClick={() => setIsDark((d) => !d)}
+        onClick={() => {
+          posthog.capture("theme_toggled", { to: isDark ? "light" : "dark" });
+          setIsDark((d) => !d);
+        }}
         className="fixed top-5 right-5 z-50 text-[var(--c-text-3)] hover:text-[var(--c-text-hi)] transition-colors"
         whileTap={{ scale: 0.85 }}
         whileHover={{ scale: 1.1 }}
@@ -115,6 +119,7 @@ export default function Port() {
             <motion.a
               key={label}
               href={href}
+              onClick={() => posthog.capture("social_link_clicked", { label, href })}
               {...(external
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}
@@ -154,6 +159,7 @@ export default function Port() {
             <motion.a
               key={label}
               href={href}
+              onClick={() => posthog.capture("social_link_clicked", { label, href })}
               {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               aria-label={label}
               title={label}
@@ -323,6 +329,7 @@ function HomeSection({ isDark }) {
           </p>
           <motion.a
             href="mailto:shsasane22@gmail.com"
+            onClick={() => posthog.capture("email_clicked", { location: "cta" })}
             className="mt-1 inline-block text-sm text-[var(--c-text-2)] hover:text-[var(--c-text-hi)] transition-colors"
             whileHover={{ x: 3 }}
             transition={{ duration: 0.15 }}
@@ -514,6 +521,7 @@ function ProjectsSection() {
             href={p.link}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => posthog.capture("project_clicked", { title: p.title, link: p.link })}
             className="group flex items-center justify-between py-5 border-b border-[var(--c-border-sub)] hover:border-[var(--c-border)] transition-colors"
             initial={{ opacity: 0, x: -12 }}
             whileInView={{ opacity: 1, x: 0 }}
