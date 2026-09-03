@@ -215,7 +215,7 @@ const mobileSocials = [
     external: true,
   },
   {
-    href: "https://twitter.com/sahilsasane",
+    href: "https://twitter.com/schiz0sane",
     icon: <TwitterBird size={22} />,
     label: "Twitter",
     external: true,
